@@ -53,5 +53,27 @@
     "duration_seconds": 18
   },
   "retraining_after_cleanup": false,
-  "validation_scope": "Preserved source/configuration, exact original BPTT export, CPU checks, resource download/build/install and native rendering. Original 64M training was not repeated."
+  "validation_scope": "Preserved source/configuration, exact original BPTT export, CPU checks, resource download/build/install and native rendering. Original 64M training was not repeated.",
+  "native_clean_release_evaluation": {
+    "completed": true,
+    "episodes": 4096,
+    "successes": 4095,
+    "success_rate": 0.999755859375,
+    "evaluator_git_sha": "71fcb2ef3dc796169a00a76a9982e7c5b1e1e591",
+    "policy_sha256": "845db072f3598bd51e065ac933cd2d5f28c8a2b0f7425f24de7ab8d1ae0a57ba",
+    "original_generated_usd_hashes_match": true,
+    "original_metrics_reproduced_exactly": [
+      "success_rate",
+      "progress",
+      "object_pos_error_m",
+      "object_rot_error_rad",
+      "contact_f1"
+    ],
+    "receipt": "results/hammer_best/evaluation_clean_release.json"
+  },
+  "github_ci": {
+    "status": "success",
+    "verified_head": "c5b9e209efc5c2f79ba7c2fb4d2bb5582bba81bf",
+    "url": "https://github.com/Hxxxz0/Supermimic-dex/actions/runs/42589580735"
+  }
 }

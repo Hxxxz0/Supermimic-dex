@@ -120,4 +120,4 @@ bash scripts/supermimic/python.sh scripts/supermimic/record_video.py \
 
 训练核心冻结在最佳版本，后续失败头、CUDA Graph、小 Actor、PPO 初始化等实验没有混入发布。整理集中在格式、去除未使用导入、可配置路径、同仓库 PPO 入口、复现文档及校验脚本，详见[复现说明](docs/REPRODUCIBILITY.md)。
 
-99.9756% 只代表一个选出的 Hammer 校准实验，不代表全任务或多个训练种子的平均结果。成功按物体位置 0.1 m、旋转 1 rad 阈值统计，Contact F1 为 0.69264；它也不能证明 BPTT 比 PPO 更快达到相同质量。原实验从头训练，整理后没有重新跑完整 64M 训练。
+99.9756% 只代表一个选出的 Hammer 校准实验，不代表全任务或多个训练种子的平均结果。成功按物体位置 0.1 m、旋转 1 rad 阈值统计，Contact F1 为 0.69264；它也不能证明 BPTT 比 PPO 更快达到相同质量。原实验从头训练，整理后没有重新跑完整 64M 训练。 整理后的独立 Git checkout 已用同一份 BPTT 权重重新完成 4096 回合评估，成功率、Progress、物体位姿误差及 Contact F1 与原记录完全一致，详见[整理后回放验证](results/hammer_best/evaluation_clean_release.json)。

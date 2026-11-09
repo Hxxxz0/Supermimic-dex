@@ -19,6 +19,8 @@ Published manifests remove machine paths and GPU identifiers, preserving configu
 
 The launch JSON contains configuration overrides; `--preset e3` supplies the preset separately. The release verifier constructs the actual baseline `TrainConfig` from that JSON and checks its resolved value against the original manifest.
 
+The cleaned checkout was independently re-evaluated in native Isaac over 4096 episodes with the original BPTT weights. Success, progress, position/rotation errors and contact F1 matched the original recorded values exactly. The generated USD hashes also match the original manifest. [Replay receipt](../results/hammer_best/evaluation_clean_release.json). This validates policy replay after cleanup; it does not replace a fresh 64M training run.
+
 ## What cleanup changes
 
 The release starts from a fresh source snapshot, with no later experimental branches or historical worktrees. Original upstream task and RSL source files remain byte-identical. Core/utility Python formatting is normalized; two unused trainer imports are removed. Runtime results/Isaac paths are configurable, and PPO defaults to this repository's unchanged baseline implementation instead of a machine-specific sibling checkout. Two assigned lambda helpers are written as equivalent named functions. The calibration-selection CPU test receives synthetic temporary clip paths, so it can run without the 13 external reference files; its original metrics and assertions are preserved.

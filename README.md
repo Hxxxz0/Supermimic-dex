@@ -21,7 +21,7 @@ This release packages the **Hammer BPTT policy with 99.9756% recorded success (4
 | Training budget | 64 million real transitions, 8000 environments |
 | Training process time | 2619.86 s on one RTX 5090 |
 
-These are measurements of one selected Hammer calibration run, not an aggregate over tasks or training seeds. The pose-based success criterion does not require perfect contact tracking. This result does not establish faster learning than PPO at matched quality. [Evaluation receipt](results/hammer_best/evaluation.json).
+These are measurements of one selected Hammer calibration run, not an aggregate over tasks or training seeds. The pose-based success criterion does not require perfect contact tracking. This result does not establish faster learning than PPO at matched quality. [Evaluation receipt](results/hammer_best/evaluation.json). The cleaned Git checkout was independently re-evaluated over 4096 episodes using the same BPTT weights and reproduced the recorded success, progress, pose errors and contact F1 exactly. [Cleanup replay receipt](results/hammer_best/evaluation_clean_release.json).
 
 ## Data downloads
 
