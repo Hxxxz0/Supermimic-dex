@@ -67,6 +67,34 @@ def test_early_ppo_checkpoint_rejected(tmp_path):
         case.validate_training(tmp_path, "ppo", 8, 64)
 
 
+def test_nonfinite_telemetry_keeps_explicit_locations_and_rejects_results():
+    original = dict(latest=dict(rg=float("nan"), losses=[float("inf"), 1.0]))
+    out = case.telemetry(original)
+    assert out["latest"] == dict(rg=None, losses=[None, 1.0])
+    assert out["nonfinite_metrics"] == [
+        dict(path="latest.rg", value="nan"),
+        dict(path="latest.losses[0]", value="inf"),
+    ]
+    json.dumps(out, allow_nan=False)
+    with pytest.raises(RuntimeError, match="Non-finite"):
+        case.require_finite(original)
+
+
+def test_process_failure_receipt_survives_nonfinite_final_metrics(tmp_path):
+    runner = case.Runner(tmp_path, tmp_path, {})
+    runner.python = ["python3"]
+    run = tmp_path / "run"
+    run.mkdir()
+    command = ["-c", "import pathlib; pathlib.Path('run/metrics.jsonl').write_text('{\"rg\": NaN}'); raise SystemExit(3)"]
+    with patch.object(case.subprocess, "check_output", return_value="GPU"):
+        with pytest.raises(RuntimeError, match="smoke failed with exit status 3"):
+            runner.execute("smoke", command, run)
+    assert json.loads((tmp_path / "smoke_process.json").read_text())["exit_code"] == 3
+    state = json.loads((tmp_path / "state.json").read_text())
+    assert not state["alive"] and state["latest"]["rg"] is None
+    assert state["nonfinite_metrics"] == [dict(path="latest.rg", value="nan")]
+
+
 def test_frozen_training_contract_detects_edits(tmp_path):
     source = tmp_path / "trainer.py"
     source.write_text("original")

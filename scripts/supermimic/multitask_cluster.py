@@ -16,6 +16,7 @@ from multitask_case import (
     git,
     last_metrics,
     stamp,
+    telemetry,
     write_json,
 )
 
@@ -199,6 +200,7 @@ def summarize(root, submissions):
         interval_seconds=3600,
         rows=rows,
     )
+    report = telemetry(report)
     write_json(root / "status.json", report)
     with (root / "hourly_checks.jsonl").open("a") as stream:
         stream.write(json.dumps(report) + "\n")

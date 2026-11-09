@@ -29,6 +29,26 @@ def write_json(path, value):
     temporary.replace(path)
 
 
+def telemetry(value):
+    """Keep non-finite diagnostics JSON-readable without accepting them as results."""
+    nonfinite = []
+
+    def visit(item, path):
+        if isinstance(item, dict):
+            return {key: visit(child, f"{path}.{key}" if path else key) for key, child in item.items()}
+        if isinstance(item, list):
+            return [visit(child, f"{path}[{index}]") for index, child in enumerate(item)]
+        if isinstance(item, float) and not math.isfinite(item):
+            nonfinite.append(dict(path=path, value=str(item)))
+            return None
+        return item
+
+    result = visit(value, "")
+    if nonfinite:
+        result["nonfinite_metrics"] = nonfinite
+    return result
+
+
 def digest(path):
     return hashlib.sha256(Path(path).read_bytes()).hexdigest()
 
@@ -154,6 +174,7 @@ class Runner:
                     )
                 )
             ]
+        out = telemetry(out)
         write_json(self.root / "state.json", out)
         with (self.root / "monitor.jsonl").open("a") as stream:
             stream.write(json.dumps(out) + "\n")
@@ -193,12 +214,18 @@ class Runner:
             finally:
                 stop.set()
                 thread.join(timeout=30)
-            self.snapshot(phase, run, process)
         elapsed = time.monotonic() - started
         write_json(
             self.root / f"{phase}_process.json",
             dict(exit_code=code, wall_seconds=elapsed, command=command),
         )
+        # Persist the actual process exit before optional telemetry. A monitoring
+        # failure must not replace the original training exception.
+        try:
+            self.snapshot(phase, run, process)
+        except Exception:
+            with (self.root / "monitor_errors.log").open("a") as stream:
+                stream.write(traceback.format_exc())
         if code:
             raise RuntimeError(f"{phase} failed with exit status {code}")
         return elapsed
