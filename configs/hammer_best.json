@@ -1,5 +1,4 @@
 {
-  "preset": "e3",
   "seed": 2026,
   "budget_updates": 500,
   "warmup_steps": 64,

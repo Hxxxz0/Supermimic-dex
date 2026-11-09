@@ -5,6 +5,7 @@ import argparse
 import ast
 import hashlib
 import json
+import runpy
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[2]
@@ -105,7 +106,16 @@ def verify(repo=REPO):
     manifest = json.loads((repo / "results/hammer_best/manifest.json").read_text())
     evaluation = json.loads((repo / "results/hammer_best/evaluation.json").read_text())
     config = json.loads((repo / "configs/hammer_best.json").read_text())
-    if config != manifest["config"] or manifest["algorithm"] != "supermimic":
+    # The launcher selects the preset via --preset; its JSON overrides must not
+    # repeat that positional keyword. Exercise the actual baseline config constructor.
+    train_config = runpy.run_path(str(repo / "contrack_supermimic/config.py"))["TrainConfig"]
+    overrides = dict(config)
+    overrides["wm_hidden"] = tuple(overrides["wm_hidden"])
+    resolved = train_config.from_preset(manifest["config"]["preset"], **overrides).to_dict()
+    if (
+        json.loads(json.dumps(resolved)) != manifest["config"]
+        or manifest["algorithm"] != "supermimic"
+    ):
         raise ValueError("Winning BPTT configuration is not preserved")
     if manifest["git_sha"] != frozen["source_sha"] or manifest["git_status"] != "":
         raise ValueError("Winning run source provenance changed")

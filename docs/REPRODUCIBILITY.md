@@ -17,6 +17,8 @@ The policy is the exact original export, including its original checkpoint schem
 
 Published manifests remove machine paths and GPU identifiers, preserving configuration, source hashes, original metrics and content hashes. Their original unsanitized JSON file hashes are recorded for provenance. [Training completion](../results/hammer_best/training_complete.json) includes real samples, Actor update count, timings and reward-parity measurements.
 
+The launch JSON contains configuration overrides; `--preset e3` supplies the preset separately. The release verifier constructs the actual baseline `TrainConfig` from that JSON and checks its resolved value against the original manifest.
+
 ## What cleanup changes
 
 The release starts from a fresh source snapshot, with no later experimental branches or historical worktrees. Original upstream task and RSL source files remain byte-identical. Core/utility Python formatting is normalized; two unused trainer imports are removed. Runtime results/Isaac paths are configurable, and PPO defaults to this repository's unchanged baseline implementation instead of a machine-specific sibling checkout. Two assigned lambda helpers are written as equivalent named functions.
