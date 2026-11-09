@@ -29,8 +29,17 @@ def main():
     parser.add_argument("--max-attempts", type=int, default=30)
     parser.add_argument("--num-envs", type=int, default=2)
     parser.add_argument("--env-index", type=int, default=0)
-    parser.add_argument("--select-success-env", action="store_true",
-                        help="Select the first successful environment in a bounded prescan")
+    parser.add_argument(
+        "--prescan-successes",
+        type=int,
+        default=1,
+        help="Required consecutive successes before choosing an environment",
+    )
+    parser.add_argument(
+        "--select-success-env",
+        action="store_true",
+        help="Select the first successful environment in a bounded prescan",
+    )
     parser.add_argument("--eye", type=float, nargs=3, default=(0.9, -0.85, 0.7))
     parser.add_argument("--lookat", type=float, nargs=3, default=(0.4, 0.0, 0.15))
     AppLauncher.add_app_launcher_args(parser)
@@ -41,14 +50,18 @@ def main():
         parser.error("--max-attempts must be at least --episodes")
     if args.num_envs < 2 or not 0 <= args.env_index < args.num_envs:
         parser.error("Invalid --num-envs or --env-index")
+    if args.prescan_successes < 1:
+        parser.error("--prescan-successes must be positive")
     args.headless = args.enable_cameras = True
     os.environ["CONTRACK_XARM_XHAND_DATA"] = str(
-        args.data.resolve() if args.embodiment == "xhand" else
-        REPO / "data/xhand/dexterhand-Cylinder_00-fps_20-xarm7_xhand-3600_3700.h5"
+        args.data.resolve()
+        if args.embodiment == "xhand"
+        else REPO / "data/xhand/dexterhand-Cylinder_00-fps_20-xarm7_xhand-3600_3700.h5"
     )
     os.environ["CONTRACK_RBY1A_SHARPA_DATA"] = str(
-        args.data.resolve() if args.embodiment == "sharpa" else
-        REPO / "data/sharpa/dexterhand-Cylinder_00-fps_20-rby1a_sharpa-3600_3700.h5"
+        args.data.resolve()
+        if args.embodiment == "sharpa"
+        else REPO / "data/sharpa/dexterhand-Cylinder_00-fps_20-rby1a_sharpa-3600_3700.h5"
     )
     from contrack_supermimic.experiment import prepare_output_links, sha256, git
 
@@ -71,8 +84,11 @@ def main():
         from rsl_rl_contrack.modules import ActorCritic
 
         torch.manual_seed(args.seed)
-        task_id = ("Isaac-Xarm-Xhand-Mimic-Manager-Play-v0" if args.embodiment == "xhand"
-                   else "Isaac-Rby1a-Sharpa-Mimic-Manager-Play-v0")
+        task_id = (
+            "Isaac-Xarm-Xhand-Mimic-Manager-Play-v0"
+            if args.embodiment == "xhand"
+            else "Isaac-Rby1a-Sharpa-Mimic-Manager-Play-v0"
+        )
         env_cfg = load_cfg_from_registry(task_id, "env_cfg_entry_point")
         agent_cfg = load_cfg_from_registry(task_id, "rsl_rl_cfg_entry_point")
         env_cfg.scene.num_envs, env_cfg.seed = args.num_envs, args.seed
@@ -102,7 +118,10 @@ def main():
         prescan_steps, prescan_outcomes = 0, []
         if args.select_success_env:
             valid = torch.ones(args.num_envs, dtype=torch.bool, device=wrapped.device)
-            scan_limit = 2 * (int(adapter.task.length / adapter.task.frame_step) + 10)
+            consecutive = torch.zeros(args.num_envs, dtype=torch.long, device=wrapped.device)
+            scan_limit = max(2, args.prescan_successes * 4) * (
+                int(adapter.task.length / adapter.task.frame_step) + 10
+            )
             found = False
             for prescan_steps in range(1, scan_limit + 1):
                 with torch.inference_mode():
@@ -111,17 +130,27 @@ def main():
                     record = adapter.finish()
                 valid &= record["valid"]
                 successes = record["done"] & record["timeout"] & ~record["terminated"] & valid
+                consecutive[record["done"] & ~successes] = 0
+                consecutive[successes] += 1
+                qualified = successes & (consecutive >= args.prescan_successes)
                 for index in record["done"].nonzero().flatten().tolist():
-                    prescan_outcomes.append(dict(environment_index=index,
-                                                 success=bool(successes[index]), step=prescan_steps))
-                if bool(successes.any()):
-                    selected = int(successes.nonzero()[0, 0])
+                    prescan_outcomes.append(
+                        dict(
+                            environment_index=index,
+                            success=bool(successes[index]),
+                            step=prescan_steps,
+                        )
+                    )
+                if bool(qualified.any()):
+                    selected = int(qualified.nonzero()[0, 0])
                     env.unwrapped.viewport_camera_controller.set_view_env_index(selected)
                     found = True
                     break
                 valid[record["done"]] = True
             if not found:
-                args.output.with_suffix(".prescan.json").write_text(json.dumps(prescan_outcomes, indent=2) + "\n")
+                args.output.with_suffix(".prescan.json").write_text(
+                    json.dumps(prescan_outcomes, indent=2) + "\n"
+                )
                 raise RuntimeError("No finite successful episode found in the bounded prescan")
         stride = max(1, round(1 / (env.unwrapped.step_dt * args.fps)))
         actual_fps = 1 / (env.unwrapped.step_dt * stride)
@@ -151,10 +180,10 @@ def main():
                     args.output.with_name(f"{args.output.stem}_frame_{frames:04d}.png")
                 )
             frames += 1
+
         # Bounded even if the simulator's termination logic fails unexpectedly.
         max_steps = attempt_limit * (int(adapter.task.length / adapter.task.frame_step) + 10)
-        while (len(episodes) < args.episodes and len(attempts) < attempt_limit
-               and steps < max_steps):
+        while len(episodes) < args.episodes and len(attempts) < attempt_limit and steps < max_steps:
             with torch.inference_mode():
                 adapter.begin()
                 obs, _, _, _ = wrapped.step(policy.act_inference(obs))
@@ -176,8 +205,11 @@ def main():
                 )
                 draw.text(
                     (18, 38),
-                    (f"Attempt {len(attempts) + 1} | selected success {len(episodes) + 1}/{args.episodes}"
-                     if args.successes_only else f"Consecutive episode {len(episodes) + 1}/{args.episodes}")
+                    (
+                        f"Attempt {len(attempts) + 1} | selected success {len(episodes) + 1}/{args.episodes}"
+                        if args.successes_only
+                        else f"Consecutive episode {len(episodes) + 1}/{args.episodes}"
+                    )
                     + f"  |  seed {args.seed}  |  {episode_steps * env.unwrapped.step_dt:.2f} s",
                     font=font,
                     fill=(190, 210, 230),
@@ -190,8 +222,13 @@ def main():
             record_stride_steps += 1
             episode_steps += 1
             if bool(record["done"][selected]):
-                outcome = dict(attempt=len(attempts) + 1, steps=episode_steps,
-                               success=bool(record["timeout"][selected] and not record["terminated"][selected]))
+                outcome = dict(
+                    attempt=len(attempts) + 1,
+                    steps=episode_steps,
+                    success=bool(
+                        record["timeout"][selected] and not record["terminated"][selected]
+                    ),
+                )
                 attempts.append(outcome)
                 if not args.successes_only or outcome["success"]:
                     episodes.append(outcome | dict(episode=len(episodes) + 1))
@@ -205,8 +242,12 @@ def main():
         writer.close()
         writer = None
         if len(episodes) != args.episodes:
-            args.output.with_suffix(".attempts.json").write_text(json.dumps(attempts, indent=2) + "\n")
-            raise RuntimeError("Recording did not complete the requested episode count within the attempt limit")
+            args.output.with_suffix(".attempts.json").write_text(
+                json.dumps(attempts, indent=2) + "\n"
+            )
+            raise RuntimeError(
+                "Recording did not complete the requested episode count within the attempt limit"
+            )
         receipt = {
             "task": title,
             "embodiment": args.embodiment,
@@ -217,12 +258,19 @@ def main():
             "evaluation_seed": args.seed,
             "environment_index": selected,
             "num_envs": args.num_envs,
-            "environment_selection": ("first successful environment in a bounded prescan"
-                                      if args.select_success_env else "specified environment"),
+            "environment_selection": (
+                "first successful environment in a bounded prescan"
+                if args.select_success_env
+                else "specified environment"
+            ),
             "prescan_steps": prescan_steps,
+            "prescan_required_successes": args.prescan_successes,
             "prescan_outcomes": prescan_outcomes,
-            "selection": ("first successful episodes; all attempts recorded" if args.successes_only
-                          else "first consecutive episodes; no success filtering"),
+            "selection": (
+                "first successful episodes; all attempts recorded"
+                if args.successes_only
+                else "first consecutive episodes; no success filtering"
+            ),
             "episodes": episodes,
             "attempts": attempts,
             "thresholds": {"position_m": 0.1, "rotation_rad": 1.0},
