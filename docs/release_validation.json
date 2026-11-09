@@ -6,8 +6,9 @@
     "passed": 29,
     "baseline_tests": 25,
     "new_resource_tests": 4,
-    "clean_clone_passed": false,
-    "note": "Earlier clean-clone status was incorrectly inferred; an independent no-data checkout is being verified after fixing the selector fixture."
+    "clean_clone_passed": true,
+    "note": "Independent no-data checkout: 29 tests passed, pytest exit code 0; full source/artifact verification passed.",
+    "no_data_checkout_source": "71fcb2ef3dc796169a00a76a9982e7c5b1e1e591"
   },
   "style": {
     "ruff": "0.14.4",
