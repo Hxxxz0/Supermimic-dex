@@ -9,7 +9,7 @@
 ## 1. 克隆代码
 
 ```bash
-git clone https://github.com/Hxxxz0/Supermimic-dex.git
+git clone --branch v0.1.0 https://github.com/Hxxxz0/Supermimic-dex.git
 cd Supermimic-dex
 ```
 

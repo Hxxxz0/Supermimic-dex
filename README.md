@@ -81,7 +81,7 @@ Run these commands from this repository after cloning it. [Setup details](docs/S
 Install the pinned Isaac environment first; see [setup](docs/SETUP.md). With an existing Isaac image:
 
 ```bash
-git clone https://github.com/Hxxxz0/Supermimic-dex.git
+git clone --branch v0.1.0 https://github.com/Hxxxz0/Supermimic-dex.git
 cd Supermimic-dex
 export CONTRACK_ISAACLAB_PATH=/absolute/path/to/IsaacLab
 export CONTRACK_RESULTS_DIR=/absolute/path/to/experiment-results
