@@ -114,6 +114,13 @@ def main():
         title = args.title or args.data.stem
         policy.load_state_dict(state["model_state_dict"])
         policy.eval()
+        # Materialize the RGB render product before any success prescan so the
+        # prescan and recording use the same native rendering setup.
+        before_render = adapter.state().clone()
+        for _ in range(8):
+            env.render()
+        if not torch.allclose(before_render, adapter.state(), atol=1e-7, rtol=1e-7):
+            raise RuntimeError("RGB warmup changed the physical state before rollout")
         selected = args.env_index
         prescan_steps, prescan_outcomes = 0, []
         if args.select_success_env:
@@ -253,6 +260,8 @@ def main():
             "embodiment": args.embodiment,
             "algorithm": algorithm,
             "renderer_git_sha": git(REPO, "rev-parse", "HEAD"),
+            "render_warmup_calls": 8,
+            "render_warmup_physics_unchanged": True,
             "checkpoint_sha256": sha256(args.checkpoint),
             "reference_sha256": sha256(args.data),
             "evaluation_seed": args.seed,
