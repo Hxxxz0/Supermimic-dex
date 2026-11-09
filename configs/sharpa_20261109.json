@@ -1,0 +1,164 @@
+{
+  "base_commit": "438d801533d20d439c2e865f913485504789e8e9",
+  "resource": "obstacle_avoidance_4090",
+  "resource_id": "quota196kavfthg7",
+  "seed": 2026,
+  "evaluation_seed": 12345,
+  "num_envs": 6000,
+  "budget_updates": 500,
+  "real_steps_per_run": 48000000,
+  "evaluation_episodes": 4096,
+  "bptt_preset": "e3",
+  "bptt_config": "configs/hammer_best.json",
+  "initialization": "from_scratch",
+  "selection": "all 13 available Sharpa clips; no outcome-based selection",
+  "scope": "Single-seed cross-embodiment screening at released Sharpa environment count. BPTT/PPO each receive 48M transitions. XHand screen used 64M, so cross-embodiment success is not a matched-interaction comparison.",
+  "frozen_training_files": {
+    "configs/hammer_best.json": "6f06c962e493a75de13c34d6c8698f82130416cb32034472e49864be20be3cb4",
+    "contrack_supermimic/__init__.py": "da0e5a3cc144ad997d8511f826f681bb8b2c639243686451bc2cc61a968758f5",
+    "contrack_supermimic/bptt.py": "6dcd1c7eccebfbae7680f6c5eab2cdacd3351678f8de3f05f9addff6f02284b1",
+    "contrack_supermimic/checkpoint.py": "91159e8f1a429acb3d5d396e0f218b84ec063b4124975ace27f79bedaf12d717",
+    "contrack_supermimic/config.py": "ddcf0f3763a3eeb45701f6d19f4a5e61afcfda44a1c7138c2c85b4ad1b52319f",
+    "contrack_supermimic/dual.py": "205c33f2344e17da29713f5d4f137c45113b76b52f13ee2a06e41bb0aa60a1e9",
+    "contrack_supermimic/experiment.py": "e828a5114654d0b3360a62b0f37bf0b931ceea75d91e86dfcb08cf1a055dd81c",
+    "contrack_supermimic/isaac_adapter.py": "6ec5867e5ead84f1e93d1e0395bfc009c81d983c7c9b7b8188b51a075ab9e430",
+    "contrack_supermimic/model.py": "1ca7cfd69a7b2adf13d5a50070ef6b2e0ed48bb22b1f9f77002905fef83e1285",
+    "contrack_supermimic/replay.py": "9d02643d16abb8b0e3db5d087bae0594c77d52f17fe9fdf048f8d36ab7fb4028",
+    "contrack_supermimic/state.py": "7af92bff4105704e40549b7f00f04910b5e8a571fdfd646dc4a48a853dd6ac5f",
+    "contrack_supermimic/task.py": "a2c69d02df8cbe8fae2f03cc43bb640392bab1c32d8ca01e92e3474b7b8e751c",
+    "contrack_supermimic/trainer.py": "2e8773486edb92580454c40795303f4ef3491e5fa99cd776dceaa0fcc169b9c3",
+    "rsl_rl_contrack/__init__.py": "eca880a726873a075dc37aba1c4da3bfa8f7a19df45ed963964e864b48c6bfcc",
+    "rsl_rl_contrack/algorithms/__init__.py": "b94298d358d2442b61b3fbc23c22b786ea8299bd5398eef95ff381705672797e",
+    "rsl_rl_contrack/algorithms/distillation.py": "397dfe4e4450504f5528024df79ede63c42b3a439859fa58a9663a628591b65d",
+    "rsl_rl_contrack/algorithms/ppo.py": "3bb870d07c00ae3a096531b496d0ebacff778ad11e758022ff56141a696b49e8",
+    "rsl_rl_contrack/env/__init__.py": "8b187dca6d7ca5f9f4ab6a8c30218ca7bd6d3f952706526cad4ae156d1541870",
+    "rsl_rl_contrack/env/cons_mimic_reward_wrapper.py": "ef9035b293c622c894a248a4cb3cb0da8773e7effa8e67c073879fdfe7b60729",
+    "rsl_rl_contrack/env/vec_env.py": "bd6c436fa7cd68720e3fe0df936809a2a813c4ce31e018498d2e3a20ce99e831",
+    "rsl_rl_contrack/modules/__init__.py": "6c182f409103f6c6ee74137f3c5eb62b1985f4b4e6b26d0d1d792ba9e3398b3d",
+    "rsl_rl_contrack/modules/actor_critic.py": "4bb5b0034df22e357c0acb729b409cd7979a7bce1810d317e1740fc211345fdc",
+    "rsl_rl_contrack/modules/actor_critic_recurrent.py": "4ccc7299731c3445fe85d069fcbb1c8d502ad4830a9744460fbf891faff5da84",
+    "rsl_rl_contrack/modules/rnd.py": "afac724e4100823a907598999e09b230d9b1cad06b31dc8ac3fd8fe2f42db168",
+    "rsl_rl_contrack/modules/student_teacher.py": "74b8e04c72e286298c9707f6636d2aaa25958f4b5989976d31560b424c951957",
+    "rsl_rl_contrack/modules/student_teacher_recurrent.py": "c79347e3cdd988ea091e876fe92e188507bc4dfb97894129e85a7d48ee08537c",
+    "rsl_rl_contrack/modules/symmetry.py": "67cd77deaa783f6f61ff4f2d878f1ac89e51fa89f1766913a0203b33b8b272a0",
+    "rsl_rl_contrack/networks/__init__.py": "39edf0ecab4b57f5e90e8f5fc5c07cc1f345b92bc0d21be5dc7bf8e266bd94c0",
+    "rsl_rl_contrack/networks/memory.py": "1d99f244e8694a052c3afba2dc3735abf004f627d6650d4eeaf630b8a644d4ea",
+    "rsl_rl_contrack/networks/mlp.py": "fe2e87bd0080e6990d3140f72deadacbcd785520698d6ff6e96c7fabd1909109",
+    "rsl_rl_contrack/networks/normalization.py": "3028c732ca55a813dcf05405cdce7332f514840836a558be96de6a30f7b3dc6c",
+    "rsl_rl_contrack/runners/__init__.py": "c808385b7bc85650f097708f4ac478d0aea517d90ec5712fcf4298007a3ebc86",
+    "rsl_rl_contrack/runners/distillation_runner.py": "19da3d081d0e2e14b0d300a6c5b7c01311d6ffed346202f32bdd6ab2a1634bfc",
+    "rsl_rl_contrack/runners/on_policy_runner.py": "200119938b0bccc34e8f160d0f3b7381908361ed4ba8ea09fd36705f24be5e6c",
+    "rsl_rl_contrack/storage/__init__.py": "599a712105321c64423e65777d709ace050ef46d5f98b8791d697b9c4e55106e",
+    "rsl_rl_contrack/storage/rollout_storage.py": "c23070f7e4528dce815e00008ce793f01d19cd45b0baed4774edc6281b3087a2",
+    "rsl_rl_contrack/utils/__init__.py": "57d1926d619211b2c2fb19dc1797136e1a8415b6a84114ce1a69f671a08b6b72",
+    "rsl_rl_contrack/utils/neptune_utils.py": "f24ae7c83680d7b360e9201c92186f3885f7f455767038a676ae42c68e2af5ea",
+    "rsl_rl_contrack/utils/utils.py": "62372efd6b9c8015969c5efa0ae7f73fda45d3e39bf0a771aeabfe4f44526121",
+    "rsl_rl_contrack/utils/wandb_utils.py": "b3c2a122c57db3d40537caa0698709899a6b5432e162874c70eeda77cc98d3ef",
+    "scripts/supermimic/evaluate.py": "0a8db4cc71553014ed70845f1676b1a95b58cde71032a8ef5e4a376271a76653",
+    "scripts/supermimic/evaluate_wm.py": "e41c954b83237c38d415b42993ce6b53dfe6fb854c8a6e1ecc72715d094c547b",
+    "scripts/supermimic/python.sh": "d1bff3aadf869b99bcfc10f05a6605387d3031e4bceef94539c37caa4f025630",
+    "scripts/supermimic/train.py": "9f0240feca6aa5ea96ab8463cc3ee846ddf43eac7ab2b00b660ee9d853f08735",
+    "source/ConTrack/ConTrack/__init__.py": "1c969b6c852715f8d56b9b51842de922f33b5f74c141d894650abfa20dab3825",
+    "source/ConTrack/ConTrack/robots/__init__.py": "c47f60016776031555d90873ec741e8397dcf2ef4a42576b8a1c01abf22635ec",
+    "source/ConTrack/ConTrack/robots/rby1a_sharpa.py": "f7e20d74b6a11e9773fe688c98dd985fe54838385c0affbf64dd3c82e835d171",
+    "source/ConTrack/ConTrack/robots/xarm_xhand_left.py": "6561bd1c79cb76d5e9065e87512b9ff67785d74ab892e34509fc40787b674771",
+    "source/ConTrack/ConTrack/robots/xarm_xhand_right.py": "e9d23f814b7a016252e59f526314b48b02a36ea67d3894e43827df2d4dac680b",
+    "source/ConTrack/ConTrack/tasks/__init__.py": "4108a671fff7692f5f99fd5070ffdfe2042374226c3f4d160d46434bc1b3e11b",
+    "source/ConTrack/ConTrack/tasks/manager_based/__init__.py": "9b3dbcf0f85005ed2a52e0d1ab853ba107c1254bca13066b8ac1b43f6f2475bf",
+    "source/ConTrack/ConTrack/tasks/manager_based/mimic_rby1a_sharpa/__init__.py": "b325d106945695e936b06a5dd6c2b82cc7ba8b2765e6475923743c026be14560",
+    "source/ConTrack/ConTrack/tasks/manager_based/mimic_rby1a_sharpa/agents/__init__.py": "bb74600fd2b01bc1711775d7affc2a1999885f62a84f59f30358f413dea898b6",
+    "source/ConTrack/ConTrack/tasks/manager_based/mimic_rby1a_sharpa/agents/rsl_rl_ppo_cfg.py": "00a333e43e9fb4d3b07a7bf4a558ba3e183354fca2a9a0e916e88ff3c9481aac",
+    "source/ConTrack/ConTrack/tasks/manager_based/mimic_rby1a_sharpa/mdp/__init__.py": "2dd61dc2db72d0c2679c611c998119d6be045bdfe2afb0c6391f4001bd934728",
+    "source/ConTrack/ConTrack/tasks/manager_based/mimic_rby1a_sharpa/mdp/actions.py": "e21a70be3f9d282be76145c0a6f50b1a9be780a3333cc08904c47f656ee61c9b",
+    "source/ConTrack/ConTrack/tasks/manager_based/mimic_rby1a_sharpa/mdp/domain_randomization.py": "7f80b7bab3dd22b7167f87c1950e24254863162389a3a8d6926edc3a1bc9f99e",
+    "source/ConTrack/ConTrack/tasks/manager_based/mimic_rby1a_sharpa/mdp/observations.py": "bea76c1f449f12e917ac663d0be1bcfef19dfba5dd7888169c802320e1d9fa8f",
+    "source/ConTrack/ConTrack/tasks/manager_based/mimic_rby1a_sharpa/mdp/rewards.py": "c9a85a0b077aecfd9efb3d08b3ad158cc9bea6c28d0c9684be1958ab8300e0d5",
+    "source/ConTrack/ConTrack/tasks/manager_based/mimic_rby1a_sharpa/mdp/state.py": "1a5950d465b7cacc8515a0b1ce424980b1f3d32d6e751992208ddb1991f461da",
+    "source/ConTrack/ConTrack/tasks/manager_based/mimic_rby1a_sharpa/mdp/terminations.py": "a807cfa6fa8cd45a5047f5fbd5559de78c75346c62e1839285a95110b876ee63",
+    "source/ConTrack/ConTrack/tasks/manager_based/mimic_rby1a_sharpa/rby1a_sharpa_env_cfg.py": "51f4a92a8a629d0c56a011b3f885f81a6c2c7ee30c34ab07cef3c31cffecc905",
+    "source/ConTrack/ConTrack/tasks/manager_based/mimic_xarm_xhand/__init__.py": "091c7585020be41beb323e476e98f2a33df4d9231a0c502d19d4ce3e244fb789",
+    "source/ConTrack/ConTrack/tasks/manager_based/mimic_xarm_xhand/agents/__init__.py": "cd3448089096d737881c3b87f7240411f18549b08ce9d94a02b8f94a4e9cb711",
+    "source/ConTrack/ConTrack/tasks/manager_based/mimic_xarm_xhand/agents/rsl_rl_ppo_cfg.py": "ce38cc27a25b13be73d3e3c70a86a41062feea872d7dff043dce2234c9662d11",
+    "source/ConTrack/ConTrack/tasks/manager_based/mimic_xarm_xhand/mdp/__init__.py": "8caff576af06296fdaeee8d8f5a78f428c721ad871cfb4730cb4720c1914a57e",
+    "source/ConTrack/ConTrack/tasks/manager_based/mimic_xarm_xhand/mdp/actions.py": "c938c657c7381dc959ac60007ab3858ab3f992ed1ede98ba4bd89434c67bf831",
+    "source/ConTrack/ConTrack/tasks/manager_based/mimic_xarm_xhand/mdp/domain_randomization.py": "b1731c4523f43f4d2c2422be5630a4768bfc83f7e3dbce86e16eece972b47ca5",
+    "source/ConTrack/ConTrack/tasks/manager_based/mimic_xarm_xhand/mdp/observations.py": "778935d6b4024124d06899fe2a576ed0ce6f19d34be4c310995416da36b68919",
+    "source/ConTrack/ConTrack/tasks/manager_based/mimic_xarm_xhand/mdp/rewards.py": "f87c3a37de3ff055f923cc2317286dbde003d59755a0bcf5d573f72db294e273",
+    "source/ConTrack/ConTrack/tasks/manager_based/mimic_xarm_xhand/mdp/state.py": "59941e8c7414eed8fc91c60f4a334058fe7bc653103cffeb7f0240e34a68eea3",
+    "source/ConTrack/ConTrack/tasks/manager_based/mimic_xarm_xhand/mdp/terminations.py": "027bdde25bc3c695fa09c47269da59066c646c61884bece6d606ea51bc33d4b9",
+    "source/ConTrack/ConTrack/tasks/manager_based/mimic_xarm_xhand/xarm_xhand_env_cfg.py": "581995bbd1cb5e4cc74225e01acad66d59f921bcb3e5a2ecfca586ec204a5201",
+    "source/ConTrack/config/extension.toml": "5bb459072d186c7dc484b75c13f466bdabef54f480cb084c508dce0da4a29ef5",
+    "source/ConTrack/pyproject.toml": "5427dcc108de1d2537775540acdd539d65a2f31506ba992bc95e5bfeefb6f288",
+    "source/ConTrack/setup.py": "0903d604a8eae5b82b2cc486e374b20dc9aa9edf014a5108d83c8f14be47ac7f"
+  },
+  "tasks": [
+    {
+      "task": "arctic-s01_box_use_01-rby1a_sharpa-117_240",
+      "reference": "/mnt/project/public/jhz/ConTrack/data/sharpa/arctic-s01_box_use_01-rby1a_sharpa-117_240.h5",
+      "reference_sha256": "0d4a830e8a9a05ab7bd446d287dc02f60b768dca81b6319a4961b50c44b2c16b"
+    },
+    {
+      "task": "arctic-s01_mixer_use_01-rby1a_sharpa-45_345",
+      "reference": "/mnt/project/public/jhz/ConTrack/data/sharpa/arctic-s01_mixer_use_01-rby1a_sharpa-45_345.h5",
+      "reference_sha256": "e356d5c7ae5332be495c1cb3ad07fc682c13d67993998fd16ca4fdd326d78c04"
+    },
+    {
+      "task": "arctic-s01_notebook_use_01-rby1a_sharpa-180_270",
+      "reference": "/mnt/project/public/jhz/ConTrack/data/sharpa/arctic-s01_notebook_use_01-rby1a_sharpa-180_270.h5",
+      "reference_sha256": "954964d3fab47fc05015ed4294be3d550d0fd0c46e8cec71a27bac295ba60f23"
+    },
+    {
+      "task": "arctic-s01_waffleiron_use_01-rby1a_sharpa-75_195",
+      "reference": "/mnt/project/public/jhz/ConTrack/data/sharpa/arctic-s01_waffleiron_use_01-rby1a_sharpa-75_195.h5",
+      "reference_sha256": "540b2c2808809cb7b635c40b89d38e584c0c896b7f066fd2e5c7fc2d51d31a36"
+    },
+    {
+      "task": "dexterhand-Cuboid_00-fps_20-rby1a_sharpa-5880_5940",
+      "reference": "/mnt/project/public/jhz/ConTrack/data/sharpa/dexterhand-Cuboid_00-fps_20-rby1a_sharpa-5880_5940.h5",
+      "reference_sha256": "f29b84e17791e76922e07271f98e0201bd2fd630a5310bcb2b5821c133a37659"
+    },
+    {
+      "task": "dexterhand-Cuboid_01-fps_20-rby1a_sharpa-7824_7864",
+      "reference": "/mnt/project/public/jhz/ConTrack/data/sharpa/dexterhand-Cuboid_01-fps_20-rby1a_sharpa-7824_7864.h5",
+      "reference_sha256": "38a0e2f9f4a0223b6324e5973ed3b35b56c98c5edcd7c0f0b0f122e830a4c404"
+    },
+    {
+      "task": "dexterhand-Cylinder_00-fps_20-rby1a_sharpa-3600_3700",
+      "reference": "/mnt/project/public/jhz/ConTrack/data/sharpa/dexterhand-Cylinder_00-fps_20-rby1a_sharpa-3600_3700.h5",
+      "reference_sha256": "2c79c31b6c7b7e9aebfbb43a7fdf674d0e1aa0929855c496506a559d06efcd2a"
+    },
+    {
+      "task": "dexterhand-Ring_00-fps_20-rby1a_sharpa-10240_10340",
+      "reference": "/mnt/project/public/jhz/ConTrack/data/sharpa/dexterhand-Ring_00-fps_20-rby1a_sharpa-10240_10340.h5",
+      "reference_sha256": "dcb51df79ca0cf3e875a152ff46c0fb22f2cf983cfcd97060a48f7f3cf690022"
+    },
+    {
+      "task": "grab-s1_cubemedium_offhand_1-rby1a_sharpa-180_540",
+      "reference": "/mnt/project/public/jhz/ConTrack/data/sharpa/grab-s1_cubemedium_offhand_1-rby1a_sharpa-180_540.h5",
+      "reference_sha256": "c540d4feca61518cece9fb487c37315eb6f0fc29abba081a2d766dfabd9bae96"
+    },
+    {
+      "task": "grab-s1_cylindermedium_offhand_1-rby1a_sharpa-268_628",
+      "reference": "/mnt/project/public/jhz/ConTrack/data/sharpa/grab-s1_cylindermedium_offhand_1-rby1a_sharpa-268_628.h5",
+      "reference_sha256": "8c9453c0271b5ec6c096259ec01ec4eb7486ceaae8bb9fd666267680342be1b2"
+    },
+    {
+      "task": "grab-s1_hammer_use_1-rby1a_sharpa-120_840",
+      "reference": "/mnt/project/public/jhz/ConTrack/data/sharpa/grab-s1_hammer_use_1-rby1a_sharpa-120_840.h5",
+      "reference_sha256": "1199f14c5386d813cf8c0c54b27ea76e144a1dbbc3dc6dd38c626b79bda84cfc"
+    },
+    {
+      "task": "grab-s1_waterbottle_offhand_1-rby1a_sharpa-24_504",
+      "reference": "/mnt/project/public/jhz/ConTrack/data/sharpa/grab-s1_waterbottle_offhand_1-rby1a_sharpa-24_504.h5",
+      "reference_sha256": "e85e97bd12e06a54ff397b25e4bd00252fdc6b864ff2c524275f897df6301fbb"
+    },
+    {
+      "task": "grab-s1_wineglass_offhand_1-rby1a_sharpa-156_516",
+      "reference": "/mnt/project/public/jhz/ConTrack/data/sharpa/grab-s1_wineglass_offhand_1-rby1a_sharpa-156_516.h5",
+      "reference_sha256": "1d172330d83f860c4f10c675d4c8eeb01c229094104b211a244c301a6101c528"
+    }
+  ],
+  "embodiment": "sharpa",
+  "job_prefix": "smsh1109",
+  "plan_file": "configs/sharpa_20261109.json"
+}

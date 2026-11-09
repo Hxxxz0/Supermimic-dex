@@ -31,8 +31,11 @@ assets/urdf_simplify_collision
 
 # Upstream resources are downloaded at a pinned revision, not redistributed here.
 data/
+data
 assets/meshes/
+assets/meshes
 assets/urdf/
+assets/urdf
 *.h5
 *.mp4
 !docs/media/hammer_bptt_best.mp4
