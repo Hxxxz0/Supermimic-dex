@@ -44,14 +44,25 @@ def install_capture(output):
     def native(adapter):
         env = adapter.env
         fields = dict(
-            state=adapter.state(), memory=adapter.memory(), context=adapter.context,
-            ref_qpos=env.ref_qpos, ref_object_pos=env.ref_object_pos,
-            ref_object_quat=env.ref_object_quat, reset_lib_state=env.reset_lib_state,
+            state=adapter.state(),
+            memory=adapter.memory(),
+            context=adapter.context,
+            ref_qpos=env.ref_qpos,
+            ref_object_pos=env.ref_object_pos,
+            ref_object_quat=env.ref_object_quat,
+            reset_lib_state=env.reset_lib_state,
         )
         for name in dict.fromkeys(group[0] for group in adapter.read_groups):
             data = env.scene[name].data
-            for attr in ("joint_pos", "joint_vel", "joint_pos_limits", "joint_stiffness",
-                         "joint_damping", "joint_effort_limits", "root_state_w"):
+            for attr in (
+                "joint_pos",
+                "joint_vel",
+                "joint_pos_limits",
+                "joint_stiffness",
+                "joint_damping",
+                "joint_effort_limits",
+                "root_state_w",
+            ):
                 fields[f"{name}.{attr}"] = getattr(data, attr)
         observations = getattr(env.observation_manager, "_obs_buffer", {})
         for name, value in observations.items():
@@ -72,23 +83,39 @@ def install_capture(output):
         self._diagnostic_steps += 1
         invalid = not bool(record["valid"].all())
         if self._diagnostic_steps <= 3 or (invalid and self._diagnostic_invalid_steps < 3):
-            fields = {key: tensor_summary(value) for key, value in record.items()
-                      if torch.is_tensor(value) and key not in ("points", "contact")}
+            fields = {
+                key: tensor_summary(value)
+                for key, value in record.items()
+                if torch.is_tensor(value) and key not in ("points", "contact")
+            }
             expected = self.task.control(record["action"], record["memory"])
             finite = torch.isfinite(expected).all(-1) & torch.isfinite(record["u"]).all(-1)
             gap = (expected[finite] - record["u"][finite]).abs()
-            emit(dict(stage="real_step", step=self._diagnostic_steps, fields=fields,
-                      valid_rows=int(record["valid"].sum()), total_rows=self.env.num_envs,
-                      finite_action_rows=int(finite.sum()),
-                      action_gap_max=float(gap.max()) if gap.numel() else None,
-                      native=native(self)))
+            emit(
+                dict(
+                    stage="real_step",
+                    step=self._diagnostic_steps,
+                    fields=fields,
+                    valid_rows=int(record["valid"].sum()),
+                    total_rows=self.env.num_envs,
+                    finite_action_rows=int(finite.sum()),
+                    action_gap_max=float(gap.max()) if gap.numel() else None,
+                    native=native(self),
+                )
+            )
             if invalid:
                 self._diagnostic_invalid_steps += 1
                 ids = (~record["valid"]).nonzero().flatten()[:8]
-                torch.save({key: value[ids].detach().cpu() for key, value in record.items()
-                            if torch.is_tensor(value) and value.ndim > 0
-                            and value.shape[0] == self.env.num_envs},
-                           output.with_name(f"invalid_step_{self._diagnostic_steps}.pt"))
+                torch.save(
+                    {
+                        key: value[ids].detach().cpu()
+                        for key, value in record.items()
+                        if torch.is_tensor(value)
+                        and value.ndim > 0
+                        and value.shape[0] == self.env.num_envs
+                    },
+                    output.with_name(f"invalid_step_{self._diagnostic_steps}.pt"),
+                )
         return record
 
     IsaacAdapter.__init__ = initialize

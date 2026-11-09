@@ -85,7 +85,10 @@ def test_process_failure_receipt_survives_nonfinite_final_metrics(tmp_path):
     runner.python = ["python3"]
     run = tmp_path / "run"
     run.mkdir()
-    command = ["-c", "import pathlib; pathlib.Path('run/metrics.jsonl').write_text('{\"rg\": NaN}'); raise SystemExit(3)"]
+    command = [
+        "-c",
+        "import pathlib; pathlib.Path('run/metrics.jsonl').write_text('{\"rg\": NaN}'); raise SystemExit(3)",
+    ]
     with patch.object(case.subprocess, "check_output", return_value="GPU"):
         with pytest.raises(RuntimeError, match="smoke failed with exit status 3"):
             runner.execute("smoke", command, run)

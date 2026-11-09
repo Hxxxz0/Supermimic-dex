@@ -35,7 +35,9 @@ def telemetry(value):
 
     def visit(item, path):
         if isinstance(item, dict):
-            return {key: visit(child, f"{path}.{key}" if path else key) for key, child in item.items()}
+            return {
+                key: visit(child, f"{path}.{key}" if path else key) for key, child in item.items()
+            }
         if isinstance(item, list):
             return [visit(child, f"{path}[{index}]") for index, child in enumerate(item)]
         if isinstance(item, float) and not math.isfinite(item):
@@ -272,7 +274,9 @@ def main():
     parser.add_argument("--expected-commit", required=True)
     parser.add_argument("--resources", type=Path, required=True)
     parser.add_argument("--plan", type=Path, default=PLAN_PATH)
-    parser.add_argument("--diagnose", action="store_true", help="Capture read-only native smoke diagnostics")
+    parser.add_argument(
+        "--diagnose", action="store_true", help="Capture read-only native smoke diagnostics"
+    )
     args = parser.parse_args()
     plan = json.loads(args.plan.read_text())
     check_source(SOURCE, plan, args.expected_commit)
@@ -364,8 +368,11 @@ def main():
             smoke_args += ["--config", args.root / "smoke_config.json"]
         if args.diagnose:
             smoke_args = [
-                repo / "scripts/supermimic/diagnose_native.py", "train",
-                "--output", args.root / "smoke_native.jsonl", "--",
+                repo / "scripts/supermimic/diagnose_native.py",
+                "train",
+                "--output",
+                args.root / "smoke_native.jsonl",
+                "--",
                 *smoke_args[1:],
             ]
         runner.execute("smoke", smoke_args, smoke)
@@ -385,8 +392,11 @@ def main():
         smoke_eval_base = eval_base
         if args.diagnose:
             smoke_eval_base = [
-                repo / "scripts/supermimic/diagnose_native.py", "evaluate",
-                "--output", args.root / "smoke_export_native.jsonl", "--",
+                repo / "scripts/supermimic/diagnose_native.py",
+                "evaluate",
+                "--output",
+                args.root / "smoke_export_native.jsonl",
+                "--",
                 *eval_base[1:],
             ]
         runner.execute(
