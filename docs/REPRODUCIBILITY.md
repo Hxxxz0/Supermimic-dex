@@ -21,7 +21,7 @@ The launch JSON contains configuration overrides; `--preset e3` supplies the pre
 
 ## What cleanup changes
 
-The release starts from a fresh source snapshot, with no later experimental branches or historical worktrees. Original upstream task and RSL source files remain byte-identical. Core/utility Python formatting is normalized; two unused trainer imports are removed. Runtime results/Isaac paths are configurable, and PPO defaults to this repository's unchanged baseline implementation instead of a machine-specific sibling checkout. Two assigned lambda helpers are written as equivalent named functions.
+The release starts from a fresh source snapshot, with no later experimental branches or historical worktrees. Original upstream task and RSL source files remain byte-identical. Core/utility Python formatting is normalized; two unused trainer imports are removed. Runtime results/Isaac paths are configurable, and PPO defaults to this repository's unchanged baseline implementation instead of a machine-specific sibling checkout. Two assigned lambda helpers are written as equivalent named functions. The calibration-selection CPU test receives synthetic temporary clip paths, so it can run without the 13 external reference files; its original metrics and assertions are preserved.
 
 The BPTT algorithm, WM structure/loss, replay sampling, Critic/dual updates and winning hyperparameters are preserved. New additions are documentation, packaging, resource fetching, artifact/source verification, CI and policy-video recording. No failure head, CUDA Graph, small Actor, PPO initialization, or later WM-supervision experiments are included.
 

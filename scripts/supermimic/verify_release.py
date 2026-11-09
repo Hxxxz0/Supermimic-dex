@@ -41,6 +41,27 @@ class PublicationNormalizer(ast.NodeTransformer):
                 return None
         return node
 
+    def visit_FunctionDef(self, node):
+        node = self.generic_visit(node)
+        if (
+            self.path == "tests/supermimic/test_infrastructure.py"
+            and node.name == "test_calibration_picks_fastest_eligible_preset"
+        ):
+            # Replace only filesystem clip discovery in this synthetic selector test.
+            # Its original metric inputs and quality/selection assertions stay checked.
+            fixture = ast.parse(
+                'monkeypatch.setattr(module, "clips", lambda embodiment, pilot=False: '
+                '[tmp_path / (prefix + ".h5") for prefix in module.PILOTS])'
+            ).body[0]
+            fixture_ast = ast.dump(fixture, include_attributes=False)
+            node.args.args = [arg for arg in node.args.args if arg.arg != "monkeypatch"]
+            node.body = [
+                stmt
+                for stmt in node.body
+                if ast.dump(stmt, include_attributes=False) != fixture_ast
+            ]
+        return node
+
     def visit_Assign(self, node):
         self.generic_visit(node)
         names = [t.id for t in node.targets if isinstance(t, ast.Name)]

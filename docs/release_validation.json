@@ -6,7 +6,8 @@
     "passed": 29,
     "baseline_tests": 25,
     "new_resource_tests": 4,
-    "clean_clone_passed": true
+    "clean_clone_passed": false,
+    "note": "Earlier clean-clone status was incorrectly inferred; an independent no-data checkout is being verified after fixing the selector fixture."
   },
   "style": {
     "ruff": "0.14.4",

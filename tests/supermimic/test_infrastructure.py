@@ -101,8 +101,14 @@ def test_restore_recreates_step_only_terminal_buffers(task_factory):
     torch.testing.assert_close(env.reset_buf, torch.tensor([True, False]))
 
 
-def test_calibration_picks_fastest_eligible_preset(tmp_path):
+def test_calibration_picks_fastest_eligible_preset(tmp_path, monkeypatch):
     module = script("suite")
+    # Selection consumes synthetic metrics; no licensed reference files are needed.
+    monkeypatch.setattr(
+        module,
+        "clips",
+        lambda embodiment, pilot=False: [tmp_path / (prefix + ".h5") for prefix in module.PILOTS],
+    )
     suite = module.Suite.__new__(module.Suite)
     suite.root, suite.commit = tmp_path, "test"
     results = []
