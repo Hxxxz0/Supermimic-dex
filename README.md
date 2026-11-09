@@ -23,6 +23,59 @@ This release packages the **Hammer BPTT policy with 99.9756% recorded success (4
 
 These are measurements of one selected Hammer calibration run, not an aggregate over tasks or training seeds. The pose-based success criterion does not require perfect contact tracking. This result does not establish faster learning than PPO at matched quality. [Evaluation receipt](results/hammer_best/evaluation.json).
 
+## Data downloads
+
+The Hammer reference is an **already retargeted ConTrack HDF5 clip** with both robot trajectories, object geometry/poses and contact annotations. You do not need to retarget the original GRAB recordings for this reproduction.
+
+| File | Direct download | Purpose |
+| --- | --- | --- |
+| Hammer / xArm-XHand | [Download Hammer HDF5](https://raw.githubusercontent.com/EmptyBlueBox/ConTrack/f5efe18e4b1f986566b252265c4bf63f3b67c6c6/data/xhand/grab-s1_hammer_use_1-xarm7_xhand-120_840.h5) | Winning BPTT training, evaluation and video |
+| Cylinder / xArm-XHand | [Download XHand default HDF5](https://raw.githubusercontent.com/EmptyBlueBox/ConTrack/f5efe18e4b1f986566b252265c4bf63f3b67c6c6/data/xhand/dexterhand-Cylinder_00-fps_20-xarm7_xhand-3600_3700.h5) | Default required by upstream task registration |
+| Cylinder / RB-Y1A-Sharpa | [Download Sharpa default HDF5](https://raw.githubusercontent.com/EmptyBlueBox/ConTrack/f5efe18e4b1f986566b252265c4bf63f3b67c6c6/data/sharpa/dexterhand-Cylinder_00-fps_20-rby1a_sharpa-3600_3700.h5) | Default required by upstream task registration |
+
+**Recommended: fetch all required data and robot resources together.**
+
+```bash
+python3 scripts/supermimic/fetch_assets.py
+python3 scripts/supermimic/fetch_assets.py --verify-only
+```
+
+The downloader uses [this pinned upstream archive](https://github.com/EmptyBlueBox/ConTrack/archive/f5efe18e4b1f986566b252265c4bf63f3b67c6c6.tar.gz), verifies 189 files against SHA256/size, and puts references in `data/xhand` and `data/sharpa`, with robot resources in `assets/meshes` and `assets/urdf`. Downloading only Hammer is insufficient: the robot resources and both registration defaults are also required. Run USD preparation before using the simulator.
+
+Original data sources: [GRAB](https://grab.is.tue.mpg.de/) · [DexterHand](https://huggingface.co/datasets/pku-mocca/DexterHand) · [ConTrack](https://github.com/EmptyBlueBox/ConTrack). The Hammer clip is a GRAB derivative subject to the original non-commercial research-use terms; see [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
+
+## Environment configuration
+
+| Component | Tested version |
+| --- | --- |
+| Python | 3.11 |
+| Isaac Sim | 5.1.0 (exact native build recorded in the manifest) |
+| Isaac Lab | 2.3.2, commit `42e61645c96bac08135566634785cdc87728d5ab` |
+| PyTorch | 2.7.0 + CUDA 12.8 |
+| RSL RL / tensordict | 3.1.2 / 0.11.0 |
+| Recorded GPU | One RTX 5090, 32607 MiB |
+
+For an existing Isaac image, use the bundled `/isaac-sim/python.sh`, pin the Lab checkout and set the two paths shown in Quick start. For a fresh machine, create a Python 3.11 environment:
+
+```bash
+conda create -n supermimic_dex python=3.11 -y
+conda activate supermimic_dex
+python -m pip install 'isaacsim[all,extscache]==5.1.0' --extra-index-url https://pypi.nvidia.com
+python -m pip install torch==2.7.0 torchvision==0.22.0 --index-url https://download.pytorch.org/whl/cu128
+git clone https://github.com/isaac-sim/IsaacLab.git ../IsaacLab
+git -C ../IsaacLab checkout 42e61645c96bac08135566634785cdc87728d5ab
+python -m pip install 'setuptools>=77,<81' wheel
+python -m pip install --no-build-isolation flatdict==4.0.1
+(cd ../IsaacLab && ./isaaclab.sh --install rsl-rl)
+python -m pip install -r requirements.txt
+python -m pip install -e .
+python -m pip install -e source/ConTrack
+export CONTRACK_ISAACLAB_PATH="$(realpath ../IsaacLab)"
+export CONTRACK_RESULTS_DIR="$PWD/outputs"
+```
+
+Run these commands from this repository after cloning it. [Setup details](docs/SETUP.md) cover alternative Isaac Python paths, generated assets and native rendering requirements.
+
 ## Quick start
 
 Install the pinned Isaac environment first; see [setup](docs/SETUP.md). With an existing Isaac image:
