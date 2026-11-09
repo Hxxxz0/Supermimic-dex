@@ -1,0 +1,30 @@
+{
+  "checkpoint_sha256": "3ca691512a3cb728c0985e3b50d4fdf7a7618c393742dc06ca1c80dd95766d91",
+  "reference": "data/xhand/grab-s1_waterbottle_offhand_1-xarm7_xhand-24_504.h5",
+  "reference_sha256": "a9a4a106c5bd39c9142e07180bc333bd6777f8dec842bef6f279238c390d7c4f",
+  "evaluator_git_sha": "853fb15a3146788ee1b1b51f751763592cdf724d",
+  "episode_allocation": "fixed_per_environment",
+  "num_envs": 256,
+  "seed": 12345,
+  "episodes": 4096,
+  "success_rate": 0.996337890625,
+  "success_95ci": [
+    0.9939662045876101,
+    0.9977794277314531
+  ],
+  "progress": 0.9997864961624146,
+  "object_pos_error_m": 0.02238895744085312,
+  "object_rot_error_rad": 0.20462439954280853,
+  "finger_rmse_rad": 0.17089873552322388,
+  "finger_mae_rad": 0.12940888106822968,
+  "arm_mae_rad": 0.026608893647789955,
+  "metric_protocol": "ConTrack_sec4.3_episode_mean_pose_joint_and_pooled_contact",
+  "contact_f1": 0.6348251700401306,
+  "contact_point_error_m": 0.027120918035507202,
+  "contact_point_samples": 2738273,
+  "thresholds": {
+    "position_m": 0.1,
+    "rotation_rad": 1.0
+  },
+  "checkpoint": "results/waterbottle_e3/policy.pt"
+}

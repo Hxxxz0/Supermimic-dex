@@ -1,0 +1,29 @@
+{
+  "checked_utc": "2026-11-09T15:35:04.265728+00:00",
+  "xhand": {
+    "state": "complete",
+    "additional_tasks": 10,
+    "evaluated_cases": 20,
+    "real_steps_per_run": 64000000,
+    "results": "results/xhand_screen_20261109/results.json"
+  },
+  "sharpa": {
+    "state": "in_progress",
+    "tasks": 13,
+    "submitted": 26,
+    "terminal": 0,
+    "evaluated": 0,
+    "cloud_statuses": {
+      "Queuing": 26
+    },
+    "real_steps_per_run": 48000000,
+    "num_envs": 6000,
+    "training_seed": 2026,
+    "evaluation_episodes": 4096,
+    "experiment_branch": "exp/sharpa-20261109",
+    "training_source_commit": "21e4474ee15cdfa5b9d644dc0890b0e0e20d7c6c",
+    "monitor_interval_seconds": 3600,
+    "publish_final_results_when_complete": true
+  },
+  "author_for_new_commits": "Hxxxz0"
+}

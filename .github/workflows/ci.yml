@@ -30,6 +30,8 @@ jobs:
           PYTEST_DISABLE_PLUGIN_AUTOLOAD: "1"
         run: python -m pytest -q
       - name: Verify released policy and frozen source contracts
-        run: python scripts/supermimic/verify_release.py
+        run: |
+          python scripts/supermimic/verify_release.py
+          python scripts/supermimic/verify_cross_task_results.py
       - name: Build distribution
         run: python -m build

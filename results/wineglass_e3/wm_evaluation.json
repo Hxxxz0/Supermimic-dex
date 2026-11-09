@@ -1,0 +1,38 @@
+{
+  "1": {
+    "valid_samples": 256,
+    "joint_position_rmse_rad": 0.003469158662483096,
+    "joint_velocity_rmse_rad_s": 0.5123489499092102,
+    "object_position_rmse_m": 0.0007885390077717602,
+    "object_rotation_error_rad": 0.023212604224681854,
+    "contact_f1": 0.9780219793319702,
+    "contact_point_error_m": 0.0060581606812775135
+  },
+  "8": {
+    "valid_samples": 239,
+    "joint_position_rmse_rad": 0.00815519504249096,
+    "joint_velocity_rmse_rad_s": 0.47600945830345154,
+    "object_position_rmse_m": 0.002987039741128683,
+    "object_rotation_error_rad": 0.09564703702926636,
+    "contact_f1": 0.9599037766456604,
+    "contact_point_error_m": 0.007268242537975311
+  },
+  "16": {
+    "valid_samples": 222,
+    "joint_position_rmse_rad": 0.011703260242938995,
+    "joint_velocity_rmse_rad_s": 0.5393882393836975,
+    "object_position_rmse_m": 0.00858510471880436,
+    "object_rotation_error_rad": 0.15098562836647034,
+    "contact_f1": 0.9298545718193054,
+    "contact_point_error_m": 0.008803359232842922
+  },
+  "32": {
+    "valid_samples": 186,
+    "joint_position_rmse_rad": 0.016870707273483276,
+    "joint_velocity_rmse_rad_s": 0.5537028908729553,
+    "object_position_rmse_m": 0.025689439848065376,
+    "object_rotation_error_rad": 0.24578829109668732,
+    "contact_f1": 0.8898721933364868,
+    "contact_point_error_m": 0.012285909615457058
+  }
+}

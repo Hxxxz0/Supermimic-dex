@@ -6,6 +6,12 @@
 
 [观看 Hammer BPTT 视频：18 秒，连续 3 回合](docs/media/hammer_bptt_best.mp4) · [BPTT 权重](results/hammer_best/policy.pt) · [评估记录](results/hammer_best/evaluation.json)
 
+## 跨任务更新：2026-11-09
+
+新增 10 个 XHand 任务的 BPTT/PPO 对照已完成。使用相同 Hammer e3 配置，从头训练的 **酒杯成功率为 99.9756%**，**水瓶为 99.6338%**；两份 BPTT 权重及评估记录已包含在仓库中。[完整结果表、数据链接和复现命令](docs/CROSS_TASK_RESULTS.md)。
+
+这轮是单 seed、每项 64M 交互的结果。其他任务仍明显落后于 PPO，实测 BPTT 训练耗时为 PPO 的 1.51–1.86 倍。剩余 13 个 Sharpa 任务正在单独测试，[状态见这里](results/experiment_status.json)。`v0.1.0` 保留原 Hammer 发布版本；获取新权重请克隆当前 main。
+
 ## 1. 克隆代码
 
 ```bash

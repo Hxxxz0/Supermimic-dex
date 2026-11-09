@@ -1,7 +1,11 @@
 include README_zh.md SUPERMIMIC.md requirements.txt
+include results/experiment_status.json
 recursive-include docs *.md *.json *.png *.jpg *.mp4
 recursive-include configs *.json
 recursive-include results/hammer_best *.json *.pt
+recursive-include results/wineglass_e3 *.json *.pt
+recursive-include results/waterbottle_e3 *.json *.pt
+recursive-include results/xhand_screen_20261109 *.json
 recursive-include scripts *.py *.sh
 recursive-include source/ConTrack *.py *.toml
 recursive-include tests *.py
