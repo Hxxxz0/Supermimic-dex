@@ -1,0 +1,40 @@
+{
+  "training_source_commit": "853fb15a3146788ee1b1b51f751763592cdf724d",
+  "algorithm": "supermimic",
+  "initialization": "from_scratch",
+  "training_seed": 2026,
+  "num_envs": 8000,
+  "vector_steps": 8000,
+  "real_steps": 64000000,
+  "evaluation_episodes": 4096,
+  "evaluation": {
+    "checkpoint": "results/cubemedium_e3/policy.pt",
+    "checkpoint_sha256": "d32bae4ac657ea6e729467516056f445e9316db0d3c67ac11ac0c82b9d9767b4",
+    "reference": "data/xhand/grab-s1_cubemedium_offhand_1-xarm7_xhand-180_540.h5",
+    "reference_sha256": "d4fb841bcb37dad823b925c924957524ae3700d6cfd0061ffaa0be46e8322cfb",
+    "evaluator_git_sha": "853fb15a3146788ee1b1b51f751763592cdf724d",
+    "episode_allocation": "fixed_per_environment",
+    "num_envs": 256,
+    "seed": 12345,
+    "episodes": 4096,
+    "success_rate": 0.1748046875,
+    "success_95ci": [
+      0.16347948373760648,
+      0.18673931495939686
+    ],
+    "progress": 0.9379717707633972,
+    "object_pos_error_m": 0.017222100868821144,
+    "object_rot_error_rad": 0.34035104513168335,
+    "finger_rmse_rad": 0.20276238024234772,
+    "finger_mae_rad": 0.1545676290988922,
+    "arm_mae_rad": 0.03698691353201866,
+    "metric_protocol": "ConTrack_sec4.3_episode_mean_pose_joint_and_pooled_contact",
+    "contact_f1": 0.7284714579582214,
+    "contact_point_error_m": 0.02683197148144245,
+    "contact_point_samples": 1877723,
+    "thresholds": {
+      "position_m": 0.1,
+      "rotation_rad": 1.0
+    }
+  }
+}

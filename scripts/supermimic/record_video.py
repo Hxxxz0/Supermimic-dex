@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Record consecutive first-frame episodes of a trained policy in real Isaac physics."""
+"""Record native policy episodes, optionally retaining only verified successes."""
 
 import argparse
 import json
@@ -23,19 +23,47 @@ def main():
     parser.add_argument("--episodes", type=int, default=3)
     parser.add_argument("--seed", type=int, default=12345)
     parser.add_argument("--fps", type=int, default=30)
+    parser.add_argument("--title", help="Task label displayed on the video")
+    parser.add_argument("--embodiment", choices=("xhand", "sharpa"), default="xhand")
+    parser.add_argument("--successes-only", action="store_true")
+    parser.add_argument("--max-attempts", type=int, default=30)
+    parser.add_argument("--num-envs", type=int, default=2)
+    parser.add_argument("--env-index", type=int, default=0)
+    parser.add_argument(
+        "--prescan-successes",
+        type=int,
+        default=1,
+        help="Required consecutive successes before choosing an environment",
+    )
+    parser.add_argument(
+        "--select-success-env",
+        action="store_true",
+        help="Select the first successful environment in a bounded prescan",
+    )
     parser.add_argument("--eye", type=float, nargs=3, default=(0.9, -0.85, 0.7))
     parser.add_argument("--lookat", type=float, nargs=3, default=(0.4, 0.0, 0.15))
     AppLauncher.add_app_launcher_args(parser)
     args = parser.parse_args()
     if args.episodes < 1 or args.fps < 1:
         parser.error("--episodes and --fps must be positive")
+    if args.successes_only and args.max_attempts < args.episodes:
+        parser.error("--max-attempts must be at least --episodes")
+    if args.num_envs < 2 or not 0 <= args.env_index < args.num_envs:
+        parser.error("Invalid --num-envs or --env-index")
+    if args.prescan_successes < 1:
+        parser.error("--prescan-successes must be positive")
     args.headless = args.enable_cameras = True
-    os.environ["CONTRACK_XARM_XHAND_DATA"] = str(args.data.resolve())
-    os.environ.setdefault(
-        "CONTRACK_RBY1A_SHARPA_DATA",
-        str(REPO / "data/sharpa/dexterhand-Cylinder_00-fps_20-rby1a_sharpa-3600_3700.h5"),
+    os.environ["CONTRACK_XARM_XHAND_DATA"] = str(
+        args.data.resolve()
+        if args.embodiment == "xhand"
+        else REPO / "data/xhand/dexterhand-Cylinder_00-fps_20-xarm7_xhand-3600_3700.h5"
     )
-    from contrack_supermimic.experiment import prepare_output_links, sha256
+    os.environ["CONTRACK_RBY1A_SHARPA_DATA"] = str(
+        args.data.resolve()
+        if args.embodiment == "sharpa"
+        else REPO / "data/sharpa/dexterhand-Cylinder_00-fps_20-rby1a_sharpa-3600_3700.h5"
+    )
+    from contrack_supermimic.experiment import prepare_output_links, sha256, git
 
     prepare_output_links(REPO)
     args.output.parent.mkdir(parents=True, exist_ok=True)
@@ -56,16 +84,20 @@ def main():
         from rsl_rl_contrack.modules import ActorCritic
 
         torch.manual_seed(args.seed)
-        task_id = "Isaac-Xarm-Xhand-Mimic-Manager-Play-v0"
+        task_id = (
+            "Isaac-Xarm-Xhand-Mimic-Manager-Play-v0"
+            if args.embodiment == "xhand"
+            else "Isaac-Rby1a-Sharpa-Mimic-Manager-Play-v0"
+        )
         env_cfg = load_cfg_from_registry(task_id, "env_cfg_entry_point")
         agent_cfg = load_cfg_from_registry(task_id, "rsl_rl_cfg_entry_point")
-        env_cfg.scene.num_envs, env_cfg.seed = 2, args.seed
+        env_cfg.scene.num_envs, env_cfg.seed = args.num_envs, args.seed
         env_cfg.sim.device = args.device or "cuda:0"
         env_cfg.object_pos_threshold_min = env_cfg.object_pos_threshold_max = 0.1
         env_cfg.object_rot_threshold_min = env_cfg.object_rot_threshold_max = 1.0
         env_cfg.viewer.resolution = (1280, 720)
         env_cfg.viewer.eye, env_cfg.viewer.lookat = tuple(args.eye), tuple(args.lookat)
-        env_cfg.viewer.origin_type, env_cfg.viewer.env_index = "env", 0
+        env_cfg.viewer.origin_type, env_cfg.viewer.env_index = "env", args.env_index
         env = gym.make(task_id, cfg=env_cfg, render_mode="rgb_array")
         wrapped = RslRlVecEnvWrapper(env, clip_actions=agent_cfg.clip_actions)
         adapter = IsaacAdapter(env.unwrapped)
@@ -77,8 +109,71 @@ def main():
             obs, {"policy": ["policy"], "critic": ["critic"]}, wrapped.num_actions, **kwargs
         ).to(wrapped.device)
         state = torch.load(args.checkpoint, map_location=wrapped.device, weights_only=False)
+        algorithm = (state.get("infos") or {}).get("algorithm", "ppo")
+        method = "SuperMimic BPTT" if algorithm == "supermimic" else "PPO"
+        title = args.title or args.data.stem
         policy.load_state_dict(state["model_state_dict"])
         policy.eval()
+        # Materialize the RGB render product before any success prescan so the
+        # prescan and recording use the same native rendering setup.
+        before_render = adapter.state().clone()
+        for _ in range(8):
+            env.render()
+        if not torch.allclose(before_render, adapter.state(), atol=1e-7, rtol=1e-7):
+            raise RuntimeError("RGB warmup changed the physical state before rollout")
+        selected = args.env_index
+        prescan_steps, prescan_outcomes = 0, []
+        selection_events = []
+        if args.select_success_env:
+            valid = torch.ones(args.num_envs, dtype=torch.bool, device=wrapped.device)
+            consecutive = torch.zeros(args.num_envs, dtype=torch.long, device=wrapped.device)
+            rejected = torch.zeros(args.num_envs, dtype=torch.bool, device=wrapped.device)
+            candidate = None
+            scan_stride = max(1, round(1 / (env.unwrapped.step_dt * args.fps)))
+            scan_limit = max(2, args.prescan_successes * 6) * (
+                int(adapter.task.length / adapter.task.frame_step) + 10
+            )
+            found = False
+            for prescan_steps in range(1, scan_limit + 1):
+                with torch.inference_mode():
+                    adapter.begin()
+                    obs, _, _, _ = wrapped.step(policy.act_inference(obs))
+                    record = adapter.finish()
+                if (prescan_steps - 1) % scan_stride == 0:
+                    env.render()
+                valid &= record["valid"]
+                successes = record["done"] & record["timeout"] & ~record["terminated"] & valid
+                consecutive[record["done"] & ~successes] = 0
+                consecutive[successes] += 1
+                qualified = successes & (consecutive >= args.prescan_successes)
+                for index in record["done"].nonzero().flatten().tolist():
+                    prescan_outcomes.append(
+                        dict(
+                            environment_index=index,
+                            success=bool(successes[index]),
+                            step=prescan_steps,
+                        )
+                    )
+                if candidate is not None:
+                    if bool(record["done"][candidate] and not successes[candidate]):
+                        rejected[candidate] = True
+                        candidate = None
+                    elif bool(qualified[candidate]):
+                        selected = candidate
+                        found = True
+                        break
+                eligible = qualified & ~rejected
+                if candidate is None and bool(eligible.any()):
+                    candidate = int(eligible.nonzero()[0, 0])
+                    env.unwrapped.viewport_camera_controller.set_view_env_index(candidate)
+                    consecutive[candidate] = 0
+                    selection_events.append(dict(step=prescan_steps, environment_index=candidate))
+                valid[record["done"]] = True
+            if not found:
+                args.output.with_suffix(".prescan.json").write_text(
+                    json.dumps(prescan_outcomes, indent=2) + "\n"
+                )
+                raise RuntimeError("No finite successful episode found in the bounded prescan")
         stride = max(1, round(1 / (env.unwrapped.step_dt * args.fps)))
         actual_fps = 1 / (env.unwrapped.step_dt * stride)
         writer = imageio.get_writer(
@@ -94,15 +189,30 @@ def main():
             font = ImageFont.truetype("DejaVuSans.ttf", 22)
         except OSError:
             font = ImageFont.load_default()
-        episodes, steps, frames, episode_steps = [], 0, 0, 0
+        episodes, attempts, steps, frames, episode_steps = [], [], 0, 0, 0
+        episode_frames = []
+        attempt_limit = args.max_attempts if args.successes_only else args.episodes
+        record_stride_steps = 0
+
+        def append_frame(frame):
+            nonlocal frames
+            writer.append_data(frame)
+            if frames in (0, 45, 90):
+                Image.fromarray(frame).save(
+                    args.output.with_name(f"{args.output.stem}_frame_{frames:04d}.png")
+                )
+            frames += 1
+
         # Bounded even if the simulator's termination logic fails unexpectedly.
-        max_steps = args.episodes * (int(adapter.task.length / adapter.task.frame_step) + 10)
-        while len(episodes) < args.episodes and steps < max_steps:
+        max_steps = attempt_limit * (int(adapter.task.length / adapter.task.frame_step) + 10)
+        while len(episodes) < args.episodes and len(attempts) < attempt_limit and steps < max_steps:
             with torch.inference_mode():
                 adapter.begin()
                 obs, _, _, _ = wrapped.step(policy.act_inference(obs))
                 record = adapter.finish()
-            if steps % stride == 0:
+            if not bool(record["valid"][selected]):
+                raise RuntimeError("Non-finite native state in the recorded environment")
+            if record_stride_steps % stride == 0:
                 frame = env.render()
                 if frame is None:
                     raise RuntimeError("Isaac returned no RGB frame; check RTX/Vulkan rendering")
@@ -111,46 +221,84 @@ def main():
                 draw.rectangle((0, 0, 1280, 70), fill=(16, 20, 28))
                 draw.text(
                     (18, 9),
-                    "Hammer | SuperMimic BPTT | trained policy / real Isaac physics",
+                    f"{title} | {method} | trained policy / real Isaac physics",
                     font=font,
                     fill="white",
                 )
                 draw.text(
                     (18, 38),
-                    f"Consecutive episode {len(episodes) + 1}/{args.episodes}  |  seed {args.seed}  |  {episode_steps * env.unwrapped.step_dt:.2f} s",
+                    (
+                        f"Attempt {len(attempts) + 1} | selected success {len(episodes) + 1}/{args.episodes}"
+                        if args.successes_only
+                        else f"Consecutive episode {len(episodes) + 1}/{args.episodes}"
+                    )
+                    + f"  |  seed {args.seed}  |  {episode_steps * env.unwrapped.step_dt:.2f} s",
                     font=font,
                     fill=(190, 210, 230),
                 )
-                writer.append_data(np.asarray(picture))
-                if frames in (0, 45, 90):
-                    picture.save(
-                        args.output.with_name(f"{args.output.stem}_frame_{frames:04d}.png")
-                    )
-                frames += 1
+                if args.successes_only:
+                    episode_frames.append(np.asarray(picture).copy())
+                else:
+                    append_frame(np.asarray(picture))
             steps += 1
+            record_stride_steps += 1
             episode_steps += 1
-            if bool(record["done"][0]):
-                episodes.append(
-                    {
-                        "episode": len(episodes) + 1,
-                        "steps": episode_steps,
-                        "success": bool(record["timeout"][0] and not record["terminated"][0]),
-                    }
+            if bool(record["done"][selected]):
+                outcome = dict(
+                    attempt=len(attempts) + 1,
+                    steps=episode_steps,
+                    success=bool(
+                        record["timeout"][selected] and not record["terminated"][selected]
+                    ),
                 )
-                print(json.dumps(episodes[-1]), flush=True)
+                attempts.append(outcome)
+                if not args.successes_only or outcome["success"]:
+                    episodes.append(outcome | dict(episode=len(episodes) + 1))
+                    if args.successes_only:
+                        for frame in episode_frames:
+                            append_frame(frame)
+                print(json.dumps(outcome), flush=True)
+                episode_frames.clear()
                 episode_steps = 0
+                record_stride_steps = 0
         writer.close()
         writer = None
         if len(episodes) != args.episodes:
-            raise RuntimeError("Recording did not complete the requested episode count")
+            args.output.with_suffix(".attempts.json").write_text(
+                json.dumps(attempts, indent=2) + "\n"
+            )
+            raise RuntimeError(
+                "Recording did not complete the requested episode count within the attempt limit"
+            )
         receipt = {
+            "task": title,
+            "embodiment": args.embodiment,
+            "algorithm": algorithm,
+            "renderer_git_sha": git(REPO, "rev-parse", "HEAD"),
+            "render_warmup_calls": 8,
+            "render_warmup_physics_unchanged": True,
             "checkpoint_sha256": sha256(args.checkpoint),
             "reference_sha256": sha256(args.data),
             "evaluation_seed": args.seed,
-            "environment_index": 0,
-            "num_envs": 2,
-            "selection": "first consecutive episodes; no success filtering",
+            "environment_index": selected,
+            "num_envs": args.num_envs,
+            "environment_selection": (
+                "first successful environment in a bounded prescan"
+                if args.select_success_env
+                else "specified environment"
+            ),
+            "prescan_steps": prescan_steps,
+            "prescan_required_successes": args.prescan_successes,
+            "prescan_camera_confirmation": args.select_success_env,
+            "selection_events": selection_events,
+            "prescan_outcomes": prescan_outcomes,
+            "selection": (
+                "first successful episodes; all attempts recorded"
+                if args.successes_only
+                else "first consecutive episodes; no success filtering"
+            ),
             "episodes": episodes,
+            "attempts": attempts,
             "thresholds": {"position_m": 0.1, "rotation_rad": 1.0},
             "fps": actual_fps,
             "frames": frames,

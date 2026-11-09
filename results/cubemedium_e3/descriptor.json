@@ -1,0 +1,78 @@
+{
+  "embodiment": "xhand",
+  "hand_sizes": [
+    19,
+    19
+  ],
+  "physical_joint_names": [
+    "xarm_xhand_left/joint1",
+    "xarm_xhand_left/joint2",
+    "xarm_xhand_left/joint3",
+    "xarm_xhand_left/joint4",
+    "xarm_xhand_left/joint5",
+    "xarm_xhand_left/joint6",
+    "xarm_xhand_left/joint7",
+    "xarm_xhand_left/left_hand_thumb_bend_joint",
+    "xarm_xhand_left/left_hand_thumb_rota_joint1",
+    "xarm_xhand_left/left_hand_thumb_rota_joint2",
+    "xarm_xhand_left/left_hand_index_bend_joint",
+    "xarm_xhand_left/left_hand_index_joint1",
+    "xarm_xhand_left/left_hand_index_joint2",
+    "xarm_xhand_left/left_hand_mid_joint1",
+    "xarm_xhand_left/left_hand_mid_joint2",
+    "xarm_xhand_left/left_hand_ring_joint1",
+    "xarm_xhand_left/left_hand_ring_joint2",
+    "xarm_xhand_left/left_hand_pinky_joint1",
+    "xarm_xhand_left/left_hand_pinky_joint2",
+    "xarm_xhand_right/joint1",
+    "xarm_xhand_right/joint2",
+    "xarm_xhand_right/joint3",
+    "xarm_xhand_right/joint4",
+    "xarm_xhand_right/joint5",
+    "xarm_xhand_right/joint6",
+    "xarm_xhand_right/joint7",
+    "xarm_xhand_right/right_hand_thumb_bend_joint",
+    "xarm_xhand_right/right_hand_thumb_rota_joint1",
+    "xarm_xhand_right/right_hand_thumb_rota_joint2",
+    "xarm_xhand_right/right_hand_index_bend_joint",
+    "xarm_xhand_right/right_hand_index_joint1",
+    "xarm_xhand_right/right_hand_index_joint2",
+    "xarm_xhand_right/right_hand_mid_joint1",
+    "xarm_xhand_right/right_hand_mid_joint2",
+    "xarm_xhand_right/right_hand_ring_joint1",
+    "xarm_xhand_right/right_hand_ring_joint2",
+    "xarm_xhand_right/right_hand_pinky_joint1",
+    "xarm_xhand_right/right_hand_pinky_joint2"
+  ],
+  "object_names": [
+    "object_0"
+  ],
+  "contact_links": [
+    [
+      "contact_left_index_link1",
+      "contact_left_index_link2",
+      "contact_left_middle_link1",
+      "contact_left_middle_link2",
+      "contact_left_ring_link1",
+      "contact_left_ring_link2",
+      "contact_left_pinky_link1",
+      "contact_left_pinky_link2",
+      "contact_left_thumb_link1",
+      "contact_left_thumb_link2"
+    ],
+    [
+      "contact_right_index_link1",
+      "contact_right_index_link2",
+      "contact_right_middle_link1",
+      "contact_right_middle_link2",
+      "contact_right_ring_link1",
+      "contact_right_ring_link2",
+      "contact_right_pinky_link1",
+      "contact_right_pinky_link2",
+      "contact_right_thumb_link1",
+      "contact_right_thumb_link2"
+    ]
+  ],
+  "context_dim": 217,
+  "dt": 0.016666666666666666
+}

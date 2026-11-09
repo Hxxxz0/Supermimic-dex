@@ -1,0 +1,412 @@
+{
+  "task": "Waffleiron",
+  "embodiment": "xhand",
+  "algorithm": "supermimic",
+  "renderer_git_sha": "e5efa81820ae2b74679436dbbdb90ea407e802a4",
+  "checkpoint_sha256": "60f6a313cad0d4e5db8c4d06fee6555f71fd9ed2b9e558eb1bc72f751d1954e7",
+  "reference_sha256": "4f144221f4d00785fe91ad8a93715d8922725fd79c364da11a81f035f4e47bbf",
+  "evaluation_seed": 12345,
+  "environment_index": 0,
+  "num_envs": 64,
+  "environment_selection": "first successful environment in a bounded prescan",
+  "prescan_steps": 239,
+  "prescan_outcomes": [
+    {
+      "environment_index": 16,
+      "success": false,
+      "step": 57
+    },
+    {
+      "environment_index": 40,
+      "success": false,
+      "step": 57
+    },
+    {
+      "environment_index": 32,
+      "success": false,
+      "step": 58
+    },
+    {
+      "environment_index": 33,
+      "success": false,
+      "step": 58
+    },
+    {
+      "environment_index": 38,
+      "success": false,
+      "step": 58
+    },
+    {
+      "environment_index": 39,
+      "success": false,
+      "step": 58
+    },
+    {
+      "environment_index": 19,
+      "success": false,
+      "step": 64
+    },
+    {
+      "environment_index": 43,
+      "success": false,
+      "step": 64
+    },
+    {
+      "environment_index": 3,
+      "success": false,
+      "step": 67
+    },
+    {
+      "environment_index": 51,
+      "success": false,
+      "step": 67
+    },
+    {
+      "environment_index": 34,
+      "success": false,
+      "step": 70
+    },
+    {
+      "environment_index": 37,
+      "success": false,
+      "step": 70
+    },
+    {
+      "environment_index": 36,
+      "success": false,
+      "step": 82
+    },
+    {
+      "environment_index": 20,
+      "success": false,
+      "step": 103
+    },
+    {
+      "environment_index": 24,
+      "success": false,
+      "step": 105
+    },
+    {
+      "environment_index": 25,
+      "success": false,
+      "step": 105
+    },
+    {
+      "environment_index": 30,
+      "success": false,
+      "step": 105
+    },
+    {
+      "environment_index": 31,
+      "success": false,
+      "step": 105
+    },
+    {
+      "environment_index": 12,
+      "success": false,
+      "step": 109
+    },
+    {
+      "environment_index": 60,
+      "success": false,
+      "step": 109
+    },
+    {
+      "environment_index": 32,
+      "success": false,
+      "step": 121
+    },
+    {
+      "environment_index": 54,
+      "success": false,
+      "step": 135
+    },
+    {
+      "environment_index": 62,
+      "success": false,
+      "step": 135
+    },
+    {
+      "environment_index": 39,
+      "success": false,
+      "step": 163
+    },
+    {
+      "environment_index": 46,
+      "success": false,
+      "step": 165
+    },
+    {
+      "environment_index": 47,
+      "success": false,
+      "step": 165
+    },
+    {
+      "environment_index": 4,
+      "success": false,
+      "step": 166
+    },
+    {
+      "environment_index": 52,
+      "success": false,
+      "step": 166
+    },
+    {
+      "environment_index": 17,
+      "success": false,
+      "step": 167
+    },
+    {
+      "environment_index": 23,
+      "success": false,
+      "step": 167
+    },
+    {
+      "environment_index": 41,
+      "success": false,
+      "step": 167
+    },
+    {
+      "environment_index": 18,
+      "success": false,
+      "step": 168
+    },
+    {
+      "environment_index": 39,
+      "success": false,
+      "step": 228
+    },
+    {
+      "environment_index": 34,
+      "success": false,
+      "step": 236
+    },
+    {
+      "environment_index": 53,
+      "success": false,
+      "step": 238
+    },
+    {
+      "environment_index": 0,
+      "success": true,
+      "step": 239
+    },
+    {
+      "environment_index": 1,
+      "success": true,
+      "step": 239
+    },
+    {
+      "environment_index": 2,
+      "success": true,
+      "step": 239
+    },
+    {
+      "environment_index": 5,
+      "success": true,
+      "step": 239
+    },
+    {
+      "environment_index": 6,
+      "success": true,
+      "step": 239
+    },
+    {
+      "environment_index": 7,
+      "success": true,
+      "step": 239
+    },
+    {
+      "environment_index": 8,
+      "success": true,
+      "step": 239
+    },
+    {
+      "environment_index": 9,
+      "success": true,
+      "step": 239
+    },
+    {
+      "environment_index": 10,
+      "success": true,
+      "step": 239
+    },
+    {
+      "environment_index": 11,
+      "success": true,
+      "step": 239
+    },
+    {
+      "environment_index": 13,
+      "success": true,
+      "step": 239
+    },
+    {
+      "environment_index": 14,
+      "success": true,
+      "step": 239
+    },
+    {
+      "environment_index": 15,
+      "success": true,
+      "step": 239
+    },
+    {
+      "environment_index": 21,
+      "success": true,
+      "step": 239
+    },
+    {
+      "environment_index": 22,
+      "success": true,
+      "step": 239
+    },
+    {
+      "environment_index": 26,
+      "success": true,
+      "step": 239
+    },
+    {
+      "environment_index": 27,
+      "success": true,
+      "step": 239
+    },
+    {
+      "environment_index": 28,
+      "success": true,
+      "step": 239
+    },
+    {
+      "environment_index": 29,
+      "success": true,
+      "step": 239
+    },
+    {
+      "environment_index": 35,
+      "success": true,
+      "step": 239
+    },
+    {
+      "environment_index": 42,
+      "success": true,
+      "step": 239
+    },
+    {
+      "environment_index": 44,
+      "success": true,
+      "step": 239
+    },
+    {
+      "environment_index": 45,
+      "success": true,
+      "step": 239
+    },
+    {
+      "environment_index": 48,
+      "success": true,
+      "step": 239
+    },
+    {
+      "environment_index": 49,
+      "success": true,
+      "step": 239
+    },
+    {
+      "environment_index": 50,
+      "success": true,
+      "step": 239
+    },
+    {
+      "environment_index": 55,
+      "success": true,
+      "step": 239
+    },
+    {
+      "environment_index": 56,
+      "success": true,
+      "step": 239
+    },
+    {
+      "environment_index": 57,
+      "success": true,
+      "step": 239
+    },
+    {
+      "environment_index": 58,
+      "success": true,
+      "step": 239
+    },
+    {
+      "environment_index": 59,
+      "success": true,
+      "step": 239
+    },
+    {
+      "environment_index": 61,
+      "success": true,
+      "step": 239
+    },
+    {
+      "environment_index": 63,
+      "success": true,
+      "step": 239
+    }
+  ],
+  "selection": "first successful episodes; all attempts recorded",
+  "episodes": [
+    {
+      "attempt": 1,
+      "steps": 239,
+      "success": true,
+      "episode": 1
+    },
+    {
+      "attempt": 2,
+      "steps": 239,
+      "success": true,
+      "episode": 2
+    },
+    {
+      "attempt": 3,
+      "steps": 239,
+      "success": true,
+      "episode": 3
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "steps": 239,
+      "success": true
+    },
+    {
+      "attempt": 2,
+      "steps": 239,
+      "success": true
+    },
+    {
+      "attempt": 3,
+      "steps": 239,
+      "success": true
+    }
+  ],
+  "thresholds": {
+    "position_m": 0.1,
+    "rotation_rad": 1.0
+  },
+  "fps": 30.0,
+  "frames": 360,
+  "duration_seconds": 12.0,
+  "video_sha256": "e61b7f6df396cd4b1eb41d733115d3ad16f42cfe02e577248f21ab52b31e86be",
+  "camera_eye": [
+    0.9,
+    -0.85,
+    0.7
+  ],
+  "camera_lookat": [
+    0.4,
+    0.0,
+    0.15
+  ],
+  "note": "Illustrative policy rollout; the reported success rate comes from a separate 4096-episode evaluation."
+}

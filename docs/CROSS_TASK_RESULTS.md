@@ -21,7 +21,7 @@ These are single-seed results at a 500-update budget, not the paper’s 5000-upd
 
 这轮 BPTT 沿用 Hammer e3，从头训练，未加载 PPO 权重。酒杯和水瓶有高成功率，但其他任务差距仍然明显。单 seed、500-update 筛选不能作为论文完整预算或多 seed 结论。此版本的实测耗时比 PPO 更长。
 
-Machine-readable results and all 20 evaluation records: [results.json](../results/xhand_screen_20261109/results.json). The two new policies, manifests, evaluation and WM receipts are included in [WineGlass](../results/wineglass_e3) and [WaterBottle](../results/waterbottle_e3).
+Machine-readable results and all 20 evaluation records: [results.json](../results/xhand_screen_20261109/results.json). Policies, manifests and evaluation receipts are included for [WineGlass](../results/wineglass_e3), [WaterBottle](../results/waterbottle_e3), [Waffleiron](../results/waffleiron_e3) and [CubeMedium](../results/cubemedium_e3). [Successful BPTT videos and recording commands](SUCCESSFUL_VIDEOS.md) cover these tasks plus Hammer.
 
 ## Data and environment / 数据与环境
 
@@ -75,3 +75,5 @@ For the matched PPO control, use `--algorithm ppo` with the same data, environme
 All 13 RB-Y1A / Sharpa clips are scheduled for separate BPTT/PPO controls: 26 jobs, seed 2026, 6000 environments, 500 updates = 48M transitions per run, final evaluation 4096 episodes. This is the released Sharpa environment count, so it differs from the 64M XHand screen.
 
 Sharpa experiment status is recorded in [experiment_status.json](../results/experiment_status.json). Ongoing jobs are not counted as completed results. The cluster runner is maintained on the `exp/sharpa-20261109` branch; its workspace paths and cloud resource configuration are deployment-specific.
+
+Sharpa CubeMedium BPTT has a validated 99.7803% result (4087/4096), trained from scratch at 48M transitions. [Weights and evaluation](../results/sharpa_cubemedium_e3) and [video](SUCCESSFUL_VIDEOS.md) are included. The Sharpa campaign is ongoing; pending or failed startup cases have no final success rate.

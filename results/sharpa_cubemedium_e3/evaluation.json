@@ -1,0 +1,30 @@
+{
+  "checkpoint": "results/sharpa_cubemedium_e3/policy.pt",
+  "checkpoint_sha256": "798b18c36822b22fe30b11d95b6664db2bd2ec39b1bd92bfa5a237cf86f8c1a1",
+  "reference": "data/sharpa/grab-s1_cubemedium_offhand_1-rby1a_sharpa-180_540.h5",
+  "reference_sha256": "c540d4feca61518cece9fb487c37315eb6f0fc29abba081a2d766dfabd9bae96",
+  "evaluator_git_sha": "21e4474ee15cdfa5b9d644dc0890b0e0e20d7c6c",
+  "episode_allocation": "fixed_per_environment",
+  "num_envs": 256,
+  "seed": 12345,
+  "episodes": 4096,
+  "success_rate": 0.997802734375,
+  "success_95ci": [
+    0.9958290007607263,
+    0.9988435739065488
+  ],
+  "progress": 0.9990274906158447,
+  "object_pos_error_m": 0.013895775191485882,
+  "object_rot_error_rad": 0.1429281234741211,
+  "finger_rmse_rad": 0.16860759258270264,
+  "finger_mae_rad": 0.1322004795074463,
+  "arm_mae_rad": 0.048620350658893585,
+  "metric_protocol": "ConTrack_sec4.3_episode_mean_pose_joint_and_pooled_contact",
+  "contact_f1": 0.7395637631416321,
+  "contact_point_error_m": 0.01838764175772667,
+  "contact_point_samples": 2259297,
+  "thresholds": {
+    "position_m": 0.1,
+    "rotation_rad": 1.0
+  }
+}

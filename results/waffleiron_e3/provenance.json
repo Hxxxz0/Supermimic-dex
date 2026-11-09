@@ -1,0 +1,40 @@
+{
+  "training_source_commit": "853fb15a3146788ee1b1b51f751763592cdf724d",
+  "algorithm": "supermimic",
+  "initialization": "from_scratch",
+  "training_seed": 2026,
+  "num_envs": 8000,
+  "vector_steps": 8000,
+  "real_steps": 64000000,
+  "evaluation_episodes": 4096,
+  "evaluation": {
+    "checkpoint": "results/waffleiron_e3/policy.pt",
+    "checkpoint_sha256": "60f6a313cad0d4e5db8c4d06fee6555f71fd9ed2b9e558eb1bc72f751d1954e7",
+    "reference": "data/xhand/arctic-s01_waffleiron_use_01-xarm7_xhand-75_195.h5",
+    "reference_sha256": "4f144221f4d00785fe91ad8a93715d8922725fd79c364da11a81f035f4e47bbf",
+    "evaluator_git_sha": "853fb15a3146788ee1b1b51f751763592cdf724d",
+    "episode_allocation": "fixed_per_environment",
+    "num_envs": 256,
+    "seed": 12345,
+    "episodes": 4096,
+    "success_rate": 0.679443359375,
+    "success_95ci": [
+      0.664988528545099,
+      0.6935619091108339
+    ],
+    "progress": 0.8622083067893982,
+    "object_pos_error_m": 0.03248260170221329,
+    "object_rot_error_rad": 0.30734193325042725,
+    "finger_rmse_rad": 0.17479431629180908,
+    "finger_mae_rad": 0.15109068155288696,
+    "arm_mae_rad": 0.02644367143511772,
+    "metric_protocol": "ConTrack_sec4.3_episode_mean_pose_joint_and_pooled_contact",
+    "contact_f1": 0.64247065782547,
+    "contact_point_error_m": 0.02625660039484501,
+    "contact_point_samples": 5558025,
+    "thresholds": {
+      "position_m": 0.1,
+      "rotation_rad": 1.0
+    }
+  }
+}

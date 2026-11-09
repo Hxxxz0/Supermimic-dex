@@ -6,6 +6,9 @@ This release packages the **Hammer BPTT policy with 99.9756% recorded success (4
 
 [中文说明](README_zh.md) · [Setup](docs/SETUP.md) · [BPTT / WM design](docs/METHOD.md) · [Reproducibility](docs/REPRODUCIBILITY.md)
 
+
+[Watch six BPTT task videos](docs/SUCCESSFUL_VIDEOS.md): Hammer, WineGlass, WaterBottle, Waffleiron, XHand CubeMedium and Sharpa CubeMedium. Each new video contains three selected successful episodes; full evaluation rates and recording receipts are included.
+
 ## Cross-task update · 2026-11-09
 
 Ten additional XHand tasks have completed BPTT/PPO controls. From-scratch BPTT reached **99.9756% on WineGlass** and **99.6338% on WaterBottle**, using the same Hammer e3 configuration. Both policies and evaluation receipts are included. [Full task table, data links and reproduction commands](docs/CROSS_TASK_RESULTS.md).

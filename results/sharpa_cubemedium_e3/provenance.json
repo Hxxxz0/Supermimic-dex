@@ -1,0 +1,11 @@
+{
+  "training_source_commit": "21e4474ee15cdfa5b9d644dc0890b0e0e20d7c6c",
+  "algorithm": "supermimic",
+  "initialization": "from_scratch",
+  "training_seed": 2026,
+  "num_envs": 6000,
+  "vector_steps": 8000,
+  "real_steps": 48000000,
+  "evaluation_episodes": 4096,
+  "policy_updates": 418
+}

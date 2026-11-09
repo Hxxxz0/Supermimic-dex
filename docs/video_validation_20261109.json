@@ -1,0 +1,79 @@
+{
+  "checked_utc": "2026-11-09T17:34:45.100533+00:00",
+  "new_videos": 5,
+  "total_videos_with_hammer": 6,
+  "all_new_episodes_successful": true,
+  "physics": "native Isaac",
+  "frozen_original_source_files_verified": 87,
+  "frozen_cross_task_source_files_verified": 76,
+  "cpu_tests": 29,
+  "video_format": "H.264 / 1280x720 / 30fps; full frame counts decoded",
+  "videos": [
+    {
+      "task": "wineglass",
+      "algorithm": "supermimic",
+      "embodiment": "xhand",
+      "episodes": 3,
+      "successes": 3,
+      "recorded_attempts": 3,
+      "duration_seconds": 9.0,
+      "video_sha256": "f8251203dd0274a8bc6be6a376f1e5d669f44610bc84fa42d2f73719022f22a2",
+      "checkpoint_sha256": "37879150003ad9c38dece472cafcb07998de5692126b2c5902df4c7b1e6b7677",
+      "renderer_git_sha": "e5efa81820ae2b74679436dbbdb90ea407e802a4",
+      "selection": "first successful episodes; all attempts recorded"
+    },
+    {
+      "task": "waterbottle",
+      "algorithm": "supermimic",
+      "embodiment": "xhand",
+      "episodes": 3,
+      "successes": 3,
+      "recorded_attempts": 3,
+      "duration_seconds": 12.0,
+      "video_sha256": "033b0e1f8add1c8ec167f792f7abb209ff80e52ee20ebf2d6065e8fcd0298ec2",
+      "checkpoint_sha256": "3ca691512a3cb728c0985e3b50d4fdf7a7618c393742dc06ca1c80dd95766d91",
+      "renderer_git_sha": "e5efa81820ae2b74679436dbbdb90ea407e802a4",
+      "selection": "first successful episodes; all attempts recorded"
+    },
+    {
+      "task": "waffleiron",
+      "algorithm": "supermimic",
+      "embodiment": "xhand",
+      "episodes": 3,
+      "successes": 3,
+      "recorded_attempts": 3,
+      "duration_seconds": 12.0,
+      "video_sha256": "e61b7f6df396cd4b1eb41d733115d3ad16f42cfe02e577248f21ab52b31e86be",
+      "checkpoint_sha256": "60f6a313cad0d4e5db8c4d06fee6555f71fd9ed2b9e558eb1bc72f751d1954e7",
+      "renderer_git_sha": "e5efa81820ae2b74679436dbbdb90ea407e802a4",
+      "selection": "first successful episodes; all attempts recorded"
+    },
+    {
+      "task": "cubemedium",
+      "algorithm": "supermimic",
+      "embodiment": "xhand",
+      "episodes": 3,
+      "successes": 3,
+      "recorded_attempts": 3,
+      "duration_seconds": 9.0,
+      "video_sha256": "f68ee82eaecb31e8d90478144d26d84536612e03e3a49d8acb8c7c2eb8c5d816",
+      "checkpoint_sha256": "d32bae4ac657ea6e729467516056f445e9316db0d3c67ac11ac0c82b9d9767b4",
+      "renderer_git_sha": "e0b93f1318130a034d7b6659a616f9bce9ac8139",
+      "selection": "first successful episodes; all attempts recorded"
+    },
+    {
+      "task": "sharpa_cubemedium",
+      "algorithm": "supermimic",
+      "embodiment": "sharpa",
+      "episodes": 3,
+      "successes": 3,
+      "recorded_attempts": 3,
+      "duration_seconds": 9.0,
+      "video_sha256": "4d9e6038e26917e1e7605c11417f587f4fb9e4ff70ee0c7b3d9e97628cd70947",
+      "checkpoint_sha256": "798b18c36822b22fe30b11d95b6664db2bd2ec39b1bd92bfa5a237cf86f8c1a1",
+      "renderer_git_sha": "de8208a6f1c884b4732df14d8e279debb5b36ca4",
+      "selection": "first successful episodes; all attempts recorded"
+    }
+  ],
+  "scope": "Representative successful episodes; independent 4096-episode evaluation rates remain separate"
+}

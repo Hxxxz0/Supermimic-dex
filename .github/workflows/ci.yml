@@ -33,5 +33,6 @@ jobs:
         run: |
           python scripts/supermimic/verify_release.py
           python scripts/supermimic/verify_cross_task_results.py
+          python scripts/supermimic/verify_recorded_videos.py
       - name: Build distribution
         run: python -m build

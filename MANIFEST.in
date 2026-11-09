@@ -5,6 +5,10 @@ recursive-include configs *.json
 recursive-include results/hammer_best *.json *.pt
 recursive-include results/wineglass_e3 *.json *.pt
 recursive-include results/waterbottle_e3 *.json *.pt
+recursive-include results/waffleiron_e3 *.json *.pt
+recursive-include results/cubemedium_e3 *.json *.pt
+recursive-include results/sharpa_cubemedium_e3 *.json *.pt
+recursive-include results/sharpa_screen_20261109 *.json
 recursive-include results/xhand_screen_20261109 *.json
 recursive-include scripts *.py *.sh
 recursive-include source/ConTrack *.py *.toml

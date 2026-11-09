@@ -1,0 +1,71 @@
+{
+  "task": "WaterBottle",
+  "embodiment": "xhand",
+  "algorithm": "supermimic",
+  "renderer_git_sha": "e5efa81820ae2b74679436dbbdb90ea407e802a4",
+  "checkpoint_sha256": "3ca691512a3cb728c0985e3b50d4fdf7a7618c393742dc06ca1c80dd95766d91",
+  "reference_sha256": "a9a4a106c5bd39c9142e07180bc333bd6777f8dec842bef6f279238c390d7c4f",
+  "evaluation_seed": 12345,
+  "environment_index": 0,
+  "num_envs": 2,
+  "environment_selection": "specified environment",
+  "prescan_steps": 0,
+  "prescan_outcomes": [],
+  "selection": "first successful episodes; all attempts recorded",
+  "episodes": [
+    {
+      "attempt": 1,
+      "steps": 240,
+      "success": true,
+      "episode": 1
+    },
+    {
+      "attempt": 2,
+      "steps": 240,
+      "success": true,
+      "episode": 2
+    },
+    {
+      "attempt": 3,
+      "steps": 240,
+      "success": true,
+      "episode": 3
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "steps": 240,
+      "success": true
+    },
+    {
+      "attempt": 2,
+      "steps": 240,
+      "success": true
+    },
+    {
+      "attempt": 3,
+      "steps": 240,
+      "success": true
+    }
+  ],
+  "thresholds": {
+    "position_m": 0.1,
+    "rotation_rad": 1.0
+  },
+  "fps": 30.0,
+  "frames": 360,
+  "duration_seconds": 12.0,
+  "video_sha256": "033b0e1f8add1c8ec167f792f7abb209ff80e52ee20ebf2d6065e8fcd0298ec2",
+  "camera_eye": [
+    0.9,
+    -0.85,
+    0.7
+  ],
+  "camera_lookat": [
+    0.4,
+    0.0,
+    0.15
+  ],
+  "note": "Illustrative policy rollout; the reported success rate comes from a separate 4096-episode evaluation."
+}

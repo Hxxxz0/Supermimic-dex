@@ -6,6 +6,9 @@
 
 [观看 Hammer BPTT 视频：18 秒，连续 3 回合](docs/media/hammer_bptt_best.mp4) · [BPTT 权重](results/hammer_best/policy.pt) · [评估记录](results/hammer_best/evaluation.json)
 
+
+[观看 6 段 BPTT 任务视频](docs/SUCCESSFUL_VIDEOS.md)：Hammer、酒杯、水瓶、华夫饼机，以及 XHand、Sharpa 两种机械手的方块交接。每段新视频包含 3 个筛选后的成功回合，并附独立完整成功率和录制记录。
+
 ## 跨任务更新：2026-11-09
 
 新增 10 个 XHand 任务的 BPTT/PPO 对照已完成。使用相同 Hammer e3 配置，从头训练的 **酒杯成功率为 99.9756%**，**水瓶为 99.6338%**；两份 BPTT 权重及评估记录已包含在仓库中。[完整结果表、数据链接和复现命令](docs/CROSS_TASK_RESULTS.md)。

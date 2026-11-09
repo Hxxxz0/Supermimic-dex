@@ -16,7 +16,7 @@ For each clip, one joint world model takes:
 
 It predicts physical increments (SO(3) increments for orientation), per-hand/link/object contact logits and object-local sensor contact points. It recursively reconstructs the next physical state. Sensor points are a ConTrack contact-distance reward requirement; they are an adaptation beyond the Dex reference's physical-state/contact design.
 
-The included [Hammer descriptor](../results/hammer_best/descriptor.json) has two hands, 38 controlled joints, one object and 238 context features. Thus the physical state has 89 features, joint targets have 38, WM input has 365, and output has 148 (88 physical increments + 20 contact logits + 60 contact-point coordinates). These dimensions differ from the single-hand example and from Dex's robot.
+The included [Hammer descriptor](../results/hammer_best/descriptor.json) has two hands, 38 controlled joints, one object and 238 context features. Thus the physical state has 89 features, joint targets have 38, WM input has 365, and output has 168 (88 physical increments + 20 contact logits + 60 contact-point coordinates). These dimensions differ from the single-hand example and from Dex's robot.
 
 WM fitting recursively supervises eight steps, beginning at a real replay state and reusing predictions with recorded executed targets. Training/holdout environments are separate and sequence masks stop at episode boundaries. Targets never become recurrent inputs inside a predicted sequence.
 

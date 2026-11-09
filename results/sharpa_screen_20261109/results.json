@@ -1,0 +1,690 @@
+{
+  "checked_utc": "2026-11-09T17:37:07.699188+00:00",
+  "state": "active",
+  "embodiment": "sharpa",
+  "tasks": 13,
+  "submitted": 26,
+  "cloud_attempts": 38,
+  "retried_cases": 12,
+  "evaluated": 15,
+  "training_seed": 2026,
+  "evaluation_episodes": 4096,
+  "real_steps_per_run": 48000000,
+  "num_envs": 6000,
+  "cases": [
+    {
+      "task": "dexterhand-Cylinder_00-fps_20-rby1a_sharpa-3600_3700",
+      "algorithm": "supermimic",
+      "source_commit": "2f4aa001358e39cda998b4b694e1e49a0700d299",
+      "attempt": 2,
+      "state": "pending",
+      "evaluation": null
+    },
+    {
+      "task": "dexterhand-Cylinder_00-fps_20-rby1a_sharpa-3600_3700",
+      "algorithm": "ppo",
+      "source_commit": "21e4474ee15cdfa5b9d644dc0890b0e0e20d7c6c",
+      "attempt": 1,
+      "state": "evaluated",
+      "evaluation": {
+        "checkpoint_sha256": "2109cb0a406c86f3b948c1a8b8ca6e332450509ecc5b817f77e21538c7f99f82",
+        "reference": "data/sharpa/dexterhand-Cylinder_00-fps_20-rby1a_sharpa-3600_3700.h5",
+        "reference_sha256": "2c79c31b6c7b7e9aebfbb43a7fdf674d0e1aa0929855c496506a559d06efcd2a",
+        "evaluator_git_sha": "21e4474ee15cdfa5b9d644dc0890b0e0e20d7c6c",
+        "episode_allocation": "fixed_per_environment",
+        "num_envs": 256,
+        "seed": 12345,
+        "episodes": 4096,
+        "success_rate": 0.922119140625,
+        "success_95ci": [
+          0.9135109154653696,
+          0.9299363045443012
+        ],
+        "progress": 0.9642493724822998,
+        "object_pos_error_m": 0.027504755184054375,
+        "object_rot_error_rad": 0.41169270873069763,
+        "finger_rmse_rad": 0.1490575522184372,
+        "finger_mae_rad": 0.12124070525169373,
+        "arm_mae_rad": 0.022132016718387604,
+        "metric_protocol": "ConTrack_sec4.3_episode_mean_pose_joint_and_pooled_contact",
+        "contact_f1": 0.8223780393600464,
+        "contact_point_error_m": 0.021520424634218216,
+        "contact_point_samples": 6869556,
+        "thresholds": {
+          "position_m": 0.1,
+          "rotation_rad": 1.0
+        }
+      },
+      "initialization_verified": "from_scratch",
+      "training_process_wall_seconds": 1751.6114842759998,
+      "end_to_end_wall_seconds": 2085.441769351
+    },
+    {
+      "task": "arctic-s01_box_use_01-rby1a_sharpa-117_240",
+      "algorithm": "supermimic",
+      "source_commit": "2f4aa001358e39cda998b4b694e1e49a0700d299",
+      "attempt": 2,
+      "state": "failed",
+      "evaluation": null
+    },
+    {
+      "task": "arctic-s01_box_use_01-rby1a_sharpa-117_240",
+      "algorithm": "ppo",
+      "source_commit": "2f4aa001358e39cda998b4b694e1e49a0700d299",
+      "attempt": 2,
+      "state": "failed",
+      "evaluation": null
+    },
+    {
+      "task": "arctic-s01_mixer_use_01-rby1a_sharpa-45_345",
+      "algorithm": "supermimic",
+      "source_commit": "21e4474ee15cdfa5b9d644dc0890b0e0e20d7c6c",
+      "attempt": 1,
+      "state": "evaluated",
+      "evaluation": {
+        "checkpoint_sha256": "bd4c6318d023cc3563a1a327c81886599fe36c9b636c4e52f262d03e30f7175c",
+        "reference": "data/sharpa/arctic-s01_mixer_use_01-rby1a_sharpa-45_345.h5",
+        "reference_sha256": "e356d5c7ae5332be495c1cb3ad07fc682c13d67993998fd16ca4fdd326d78c04",
+        "evaluator_git_sha": "21e4474ee15cdfa5b9d644dc0890b0e0e20d7c6c",
+        "episode_allocation": "fixed_per_environment",
+        "num_envs": 256,
+        "seed": 12345,
+        "episodes": 4096,
+        "success_rate": 0.0,
+        "success_95ci": [
+          0.0,
+          0.0009370118104075045
+        ],
+        "progress": 0.17193666100502014,
+        "object_pos_error_m": 0.028005002066493034,
+        "object_rot_error_rad": 0.47594189643859863,
+        "finger_rmse_rad": 0.21428491175174713,
+        "finger_mae_rad": 0.18619617819786072,
+        "arm_mae_rad": 0.03164651244878769,
+        "metric_protocol": "ConTrack_sec4.3_episode_mean_pose_joint_and_pooled_contact",
+        "contact_f1": 0.4604828357696533,
+        "contact_point_error_m": 0.02964373305439949,
+        "contact_point_samples": 1759880,
+        "thresholds": {
+          "position_m": 0.1,
+          "rotation_rad": 1.0
+        }
+      },
+      "initialization_verified": "from_scratch",
+      "training_process_wall_seconds": 3681.378772284,
+      "end_to_end_wall_seconds": 4024.6253652779997
+    },
+    {
+      "task": "arctic-s01_mixer_use_01-rby1a_sharpa-45_345",
+      "algorithm": "ppo",
+      "source_commit": "21e4474ee15cdfa5b9d644dc0890b0e0e20d7c6c",
+      "attempt": 1,
+      "state": "evaluated",
+      "evaluation": {
+        "checkpoint_sha256": "eed19182a5391c3a54516258e06978e11ff8c81e92091d5a5a67d56d387ba36b",
+        "reference": "data/sharpa/arctic-s01_mixer_use_01-rby1a_sharpa-45_345.h5",
+        "reference_sha256": "e356d5c7ae5332be495c1cb3ad07fc682c13d67993998fd16ca4fdd326d78c04",
+        "evaluator_git_sha": "21e4474ee15cdfa5b9d644dc0890b0e0e20d7c6c",
+        "episode_allocation": "fixed_per_environment",
+        "num_envs": 256,
+        "seed": 12345,
+        "episodes": 4096,
+        "success_rate": 0.00048828125,
+        "success_95ci": [
+          0.00013391174162842654,
+          0.0017787475181829768
+        ],
+        "progress": 0.27290475368499756,
+        "object_pos_error_m": 0.03722607344388962,
+        "object_rot_error_rad": 0.4812697768211365,
+        "finger_rmse_rad": 0.22819951176643372,
+        "finger_mae_rad": 0.17843255400657654,
+        "arm_mae_rad": 0.04810865968465805,
+        "metric_protocol": "ConTrack_sec4.3_episode_mean_pose_joint_and_pooled_contact",
+        "contact_f1": 0.5863190293312073,
+        "contact_point_error_m": 0.033957138657569885,
+        "contact_point_samples": 3449988,
+        "thresholds": {
+          "position_m": 0.1,
+          "rotation_rad": 1.0
+        }
+      },
+      "initialization_verified": "from_scratch",
+      "training_process_wall_seconds": 2814.291260738,
+      "end_to_end_wall_seconds": 3157.804018533
+    },
+    {
+      "task": "arctic-s01_notebook_use_01-rby1a_sharpa-180_270",
+      "algorithm": "supermimic",
+      "source_commit": "21e4474ee15cdfa5b9d644dc0890b0e0e20d7c6c",
+      "attempt": 1,
+      "state": "evaluated",
+      "evaluation": {
+        "checkpoint_sha256": "8895df294355528d481b83e37ec87715fe2b0f1d5b3d56cf409cb7df20824d33",
+        "reference": "data/sharpa/arctic-s01_notebook_use_01-rby1a_sharpa-180_270.h5",
+        "reference_sha256": "954964d3fab47fc05015ed4294be3d550d0fd0c46e8cec71a27bac295ba60f23",
+        "evaluator_git_sha": "21e4474ee15cdfa5b9d644dc0890b0e0e20d7c6c",
+        "episode_allocation": "fixed_per_environment",
+        "num_envs": 256,
+        "seed": 12345,
+        "episodes": 4096,
+        "success_rate": 0.004150390625,
+        "success_95ci": [
+          0.0025929558322744703,
+          0.006637059298066175
+        ],
+        "progress": 0.405159592628479,
+        "object_pos_error_m": 0.02227041684091091,
+        "object_rot_error_rad": 0.2719278931617737,
+        "finger_rmse_rad": 0.18167054653167725,
+        "finger_mae_rad": 0.14571154117584229,
+        "arm_mae_rad": 0.037715036422014236,
+        "metric_protocol": "ConTrack_sec4.3_episode_mean_pose_joint_and_pooled_contact",
+        "contact_f1": 0.6870425343513489,
+        "contact_point_error_m": 0.03136838972568512,
+        "contact_point_samples": 2727337,
+        "thresholds": {
+          "position_m": 0.1,
+          "rotation_rad": 1.0
+        }
+      },
+      "initialization_verified": "from_scratch",
+      "training_process_wall_seconds": 3759.375119477,
+      "end_to_end_wall_seconds": 4028.1120194500004
+    },
+    {
+      "task": "arctic-s01_notebook_use_01-rby1a_sharpa-180_270",
+      "algorithm": "ppo",
+      "source_commit": "2f4aa001358e39cda998b4b694e1e49a0700d299",
+      "attempt": 2,
+      "state": "pending",
+      "evaluation": null
+    },
+    {
+      "task": "arctic-s01_waffleiron_use_01-rby1a_sharpa-75_195",
+      "algorithm": "supermimic",
+      "source_commit": "21e4474ee15cdfa5b9d644dc0890b0e0e20d7c6c",
+      "attempt": 1,
+      "state": "evaluated",
+      "evaluation": {
+        "checkpoint_sha256": "5898e5386e37d94d56434441ca1aa2b888d6bd3040b5215e91856c6ba860150b",
+        "reference": "data/sharpa/arctic-s01_waffleiron_use_01-rby1a_sharpa-75_195.h5",
+        "reference_sha256": "540b2c2808809cb7b635c40b89d38e584c0c896b7f066fd2e5c7fc2d51d31a36",
+        "evaluator_git_sha": "21e4474ee15cdfa5b9d644dc0890b0e0e20d7c6c",
+        "episode_allocation": "fixed_per_environment",
+        "num_envs": 256,
+        "seed": 12345,
+        "episodes": 4096,
+        "success_rate": 0.00732421875,
+        "success_95ci": [
+          0.0051352526903589765,
+          0.010436470861107014
+        ],
+        "progress": 0.33769160509109497,
+        "object_pos_error_m": 0.03146204352378845,
+        "object_rot_error_rad": 0.41204723715782166,
+        "finger_rmse_rad": 0.19625689089298248,
+        "finger_mae_rad": 0.15639300644397736,
+        "arm_mae_rad": 0.03143010661005974,
+        "metric_protocol": "ConTrack_sec4.3_episode_mean_pose_joint_and_pooled_contact",
+        "contact_f1": 0.5828506350517273,
+        "contact_point_error_m": 0.028249749913811684,
+        "contact_point_samples": 2088118,
+        "thresholds": {
+          "position_m": 0.1,
+          "rotation_rad": 1.0
+        }
+      },
+      "initialization_verified": "from_scratch",
+      "training_process_wall_seconds": 3942.263059886,
+      "end_to_end_wall_seconds": 4275.930565539999
+    },
+    {
+      "task": "arctic-s01_waffleiron_use_01-rby1a_sharpa-75_195",
+      "algorithm": "ppo",
+      "source_commit": "21e4474ee15cdfa5b9d644dc0890b0e0e20d7c6c",
+      "attempt": 1,
+      "state": "evaluated",
+      "evaluation": {
+        "checkpoint_sha256": "23cd611af1c0f11442fbb410b5cf4dbaefd6df5faa92ef15c6b3884c2d50b133",
+        "reference": "data/sharpa/arctic-s01_waffleiron_use_01-rby1a_sharpa-75_195.h5",
+        "reference_sha256": "540b2c2808809cb7b635c40b89d38e584c0c896b7f066fd2e5c7fc2d51d31a36",
+        "evaluator_git_sha": "21e4474ee15cdfa5b9d644dc0890b0e0e20d7c6c",
+        "episode_allocation": "fixed_per_environment",
+        "num_envs": 256,
+        "seed": 12345,
+        "episodes": 4096,
+        "success_rate": 0.81689453125,
+        "success_95ci": [
+          0.8047551150132685,
+          0.828440079649862
+        ],
+        "progress": 0.9525156617164612,
+        "object_pos_error_m": 0.02798810601234436,
+        "object_rot_error_rad": 0.26815587282180786,
+        "finger_rmse_rad": 0.20534010231494904,
+        "finger_mae_rad": 0.15203849971294403,
+        "arm_mae_rad": 0.03473186865448952,
+        "metric_protocol": "ConTrack_sec4.3_episode_mean_pose_joint_and_pooled_contact",
+        "contact_f1": 0.7507520914077759,
+        "contact_point_error_m": 0.025796888396143913,
+        "contact_point_samples": 8420356,
+        "thresholds": {
+          "position_m": 0.1,
+          "rotation_rad": 1.0
+        }
+      },
+      "initialization_verified": "from_scratch",
+      "training_process_wall_seconds": 2714.587919779,
+      "end_to_end_wall_seconds": 3075.793124144
+    },
+    {
+      "task": "dexterhand-Cuboid_00-fps_20-rby1a_sharpa-5880_5940",
+      "algorithm": "supermimic",
+      "source_commit": "53befcb30ec7eb6a6fbaf8ab744ebe015ab3f79a",
+      "attempt": 2,
+      "state": "pending",
+      "evaluation": null
+    },
+    {
+      "task": "dexterhand-Cuboid_00-fps_20-rby1a_sharpa-5880_5940",
+      "algorithm": "ppo",
+      "source_commit": "21e4474ee15cdfa5b9d644dc0890b0e0e20d7c6c",
+      "attempt": 1,
+      "state": "evaluated",
+      "evaluation": {
+        "checkpoint_sha256": "69bc8adf1a3ac532c9ae26d9dceb588dba94b5f0e44757e70c6f58712efc15e9",
+        "reference": "data/sharpa/dexterhand-Cuboid_00-fps_20-rby1a_sharpa-5880_5940.h5",
+        "reference_sha256": "f29b84e17791e76922e07271f98e0201bd2fd630a5310bcb2b5821c133a37659",
+        "evaluator_git_sha": "21e4474ee15cdfa5b9d644dc0890b0e0e20d7c6c",
+        "episode_allocation": "fixed_per_environment",
+        "num_envs": 256,
+        "seed": 12345,
+        "episodes": 4096,
+        "success_rate": 0.14990234375,
+        "success_95ci": [
+          0.13929820949216465,
+          0.1611625692852398
+        ],
+        "progress": 0.19734150171279907,
+        "object_pos_error_m": 0.03676825389266014,
+        "object_rot_error_rad": 0.9003382921218872,
+        "finger_rmse_rad": 0.09428196400403976,
+        "finger_mae_rad": 0.07313697040081024,
+        "arm_mae_rad": 0.0062945629470050335,
+        "metric_protocol": "ConTrack_sec4.3_episode_mean_pose_joint_and_pooled_contact",
+        "contact_f1": 0.7672644257545471,
+        "contact_point_error_m": 0.023134427145123482,
+        "contact_point_samples": 629804,
+        "thresholds": {
+          "position_m": 0.1,
+          "rotation_rad": 1.0
+        }
+      },
+      "initialization_verified": "from_scratch",
+      "training_process_wall_seconds": 1728.6020892660001,
+      "end_to_end_wall_seconds": 1957.2421219809999
+    },
+    {
+      "task": "dexterhand-Cuboid_01-fps_20-rby1a_sharpa-7824_7864",
+      "algorithm": "supermimic",
+      "source_commit": "21e4474ee15cdfa5b9d644dc0890b0e0e20d7c6c",
+      "attempt": 1,
+      "state": "evaluated",
+      "evaluation": {
+        "checkpoint_sha256": "439eb9869f600e5dd4f04fcd134da90f7e80671547cff4eadcdd6107d02ac90d",
+        "reference": "data/sharpa/dexterhand-Cuboid_01-fps_20-rby1a_sharpa-7824_7864.h5",
+        "reference_sha256": "38a0e2f9f4a0223b6324e5973ed3b35b56c98c5edcd7c0f0b0f122e830a4c404",
+        "evaluator_git_sha": "21e4474ee15cdfa5b9d644dc0890b0e0e20d7c6c",
+        "episode_allocation": "fixed_per_environment",
+        "num_envs": 256,
+        "seed": 12345,
+        "episodes": 4096,
+        "success_rate": 0.00341796875,
+        "success_95ci": [
+          0.0020371307239732987,
+          0.005729413232261498
+        ],
+        "progress": 0.44310274720191956,
+        "object_pos_error_m": 0.021109692752361298,
+        "object_rot_error_rad": 0.36179620027542114,
+        "finger_rmse_rad": 0.17754870653152466,
+        "finger_mae_rad": 0.15082873404026031,
+        "arm_mae_rad": 0.02217545546591282,
+        "metric_protocol": "ConTrack_sec4.3_episode_mean_pose_joint_and_pooled_contact",
+        "contact_f1": 0.6587510108947754,
+        "contact_point_error_m": 0.017206795513629913,
+        "contact_point_samples": 737255,
+        "thresholds": {
+          "position_m": 0.1,
+          "rotation_rad": 1.0
+        }
+      },
+      "initialization_verified": "from_scratch",
+      "training_process_wall_seconds": 2694.9171966589997,
+      "end_to_end_wall_seconds": 2881.091950796
+    },
+    {
+      "task": "dexterhand-Cuboid_01-fps_20-rby1a_sharpa-7824_7864",
+      "algorithm": "ppo",
+      "source_commit": "2f4aa001358e39cda998b4b694e1e49a0700d299",
+      "attempt": 2,
+      "state": "failed",
+      "evaluation": null
+    },
+    {
+      "task": "dexterhand-Ring_00-fps_20-rby1a_sharpa-10240_10340",
+      "algorithm": "supermimic",
+      "source_commit": "2f4aa001358e39cda998b4b694e1e49a0700d299",
+      "attempt": 2,
+      "state": "pending",
+      "evaluation": null
+    },
+    {
+      "task": "dexterhand-Ring_00-fps_20-rby1a_sharpa-10240_10340",
+      "algorithm": "ppo",
+      "source_commit": "21e4474ee15cdfa5b9d644dc0890b0e0e20d7c6c",
+      "attempt": 1,
+      "state": "evaluated",
+      "evaluation": {
+        "checkpoint_sha256": "ce118b6f0cb573c786525660ecf02c73c1b47c42436e9ed2928626d50f58dc49",
+        "reference": "data/sharpa/dexterhand-Ring_00-fps_20-rby1a_sharpa-10240_10340.h5",
+        "reference_sha256": "dcb51df79ca0cf3e875a152ff46c0fb22f2cf983cfcd97060a48f7f3cf690022",
+        "evaluator_git_sha": "21e4474ee15cdfa5b9d644dc0890b0e0e20d7c6c",
+        "episode_allocation": "fixed_per_environment",
+        "num_envs": 256,
+        "seed": 12345,
+        "episodes": 4096,
+        "success_rate": 0.060546875,
+        "success_95ci": [
+          0.053646488058613495,
+          0.06827080747787748
+        ],
+        "progress": 0.47649508714675903,
+        "object_pos_error_m": 0.017887547612190247,
+        "object_rot_error_rad": 0.4340783357620239,
+        "finger_rmse_rad": 0.17992450296878815,
+        "finger_mae_rad": 0.14432963728904724,
+        "arm_mae_rad": 0.028572462499141693,
+        "metric_protocol": "ConTrack_sec4.3_episode_mean_pose_joint_and_pooled_contact",
+        "contact_f1": 0.6852849125862122,
+        "contact_point_error_m": 0.021581117063760757,
+        "contact_point_samples": 2454462,
+        "thresholds": {
+          "position_m": 0.1,
+          "rotation_rad": 1.0
+        }
+      },
+      "initialization_verified": "from_scratch",
+      "training_process_wall_seconds": 1975.220120386,
+      "end_to_end_wall_seconds": 2237.485506596
+    },
+    {
+      "task": "grab-s1_cubemedium_offhand_1-rby1a_sharpa-180_540",
+      "algorithm": "supermimic",
+      "source_commit": "21e4474ee15cdfa5b9d644dc0890b0e0e20d7c6c",
+      "attempt": 1,
+      "state": "evaluated",
+      "evaluation": {
+        "checkpoint_sha256": "798b18c36822b22fe30b11d95b6664db2bd2ec39b1bd92bfa5a237cf86f8c1a1",
+        "reference": "data/sharpa/grab-s1_cubemedium_offhand_1-rby1a_sharpa-180_540.h5",
+        "reference_sha256": "c540d4feca61518cece9fb487c37315eb6f0fc29abba081a2d766dfabd9bae96",
+        "evaluator_git_sha": "21e4474ee15cdfa5b9d644dc0890b0e0e20d7c6c",
+        "episode_allocation": "fixed_per_environment",
+        "num_envs": 256,
+        "seed": 12345,
+        "episodes": 4096,
+        "success_rate": 0.997802734375,
+        "success_95ci": [
+          0.9958290007607263,
+          0.9988435739065488
+        ],
+        "progress": 0.9990274906158447,
+        "object_pos_error_m": 0.013895775191485882,
+        "object_rot_error_rad": 0.1429281234741211,
+        "finger_rmse_rad": 0.16860759258270264,
+        "finger_mae_rad": 0.1322004795074463,
+        "arm_mae_rad": 0.048620350658893585,
+        "metric_protocol": "ConTrack_sec4.3_episode_mean_pose_joint_and_pooled_contact",
+        "contact_f1": 0.7395637631416321,
+        "contact_point_error_m": 0.01838764175772667,
+        "contact_point_samples": 2259297,
+        "thresholds": {
+          "position_m": 0.1,
+          "rotation_rad": 1.0
+        }
+      },
+      "initialization_verified": "from_scratch",
+      "training_process_wall_seconds": 3263.160379219,
+      "end_to_end_wall_seconds": 3595.725443465
+    },
+    {
+      "task": "grab-s1_cubemedium_offhand_1-rby1a_sharpa-180_540",
+      "algorithm": "ppo",
+      "source_commit": "2f4aa001358e39cda998b4b694e1e49a0700d299",
+      "attempt": 2,
+      "state": "failed",
+      "evaluation": null
+    },
+    {
+      "task": "grab-s1_cylindermedium_offhand_1-rby1a_sharpa-268_628",
+      "algorithm": "supermimic",
+      "source_commit": "21e4474ee15cdfa5b9d644dc0890b0e0e20d7c6c",
+      "attempt": 1,
+      "state": "evaluated",
+      "evaluation": {
+        "checkpoint_sha256": "bd5d6a985cf2a688e5c4fd8467d363a2f4bb65c05a03e6862b6f67ea258f2d17",
+        "reference": "data/sharpa/grab-s1_cylindermedium_offhand_1-rby1a_sharpa-268_628.h5",
+        "reference_sha256": "8c9453c0271b5ec6c096259ec01ec4eb7486ceaae8bb9fd666267680342be1b2",
+        "evaluator_git_sha": "21e4474ee15cdfa5b9d644dc0890b0e0e20d7c6c",
+        "episode_allocation": "fixed_per_environment",
+        "num_envs": 256,
+        "seed": 12345,
+        "episodes": 4096,
+        "success_rate": 0.0,
+        "success_95ci": [
+          0.0,
+          0.0009370118104075045
+        ],
+        "progress": 0.29766878485679626,
+        "object_pos_error_m": 0.013433326035737991,
+        "object_rot_error_rad": 0.07493933290243149,
+        "finger_rmse_rad": 0.17743420600891113,
+        "finger_mae_rad": 0.14508569240570068,
+        "arm_mae_rad": 0.030247366055846214,
+        "metric_protocol": "ConTrack_sec4.3_episode_mean_pose_joint_and_pooled_contact",
+        "contact_f1": 0.7777860760688782,
+        "contact_point_error_m": 0.01727394573390484,
+        "contact_point_samples": 462885,
+        "thresholds": {
+          "position_m": 0.1,
+          "rotation_rad": 1.0
+        }
+      },
+      "initialization_verified": "from_scratch",
+      "training_process_wall_seconds": 3068.384015909,
+      "end_to_end_wall_seconds": 3252.324314237
+    },
+    {
+      "task": "grab-s1_cylindermedium_offhand_1-rby1a_sharpa-268_628",
+      "algorithm": "ppo",
+      "source_commit": "2f4aa001358e39cda998b4b694e1e49a0700d299",
+      "attempt": 2,
+      "state": "evaluated",
+      "evaluation": {
+        "checkpoint_sha256": "055083acd844b78ab9ac2e1212e778e1a971767e64ef03cd78e5836f5abeb920",
+        "reference": "data/sharpa/grab-s1_cylindermedium_offhand_1-rby1a_sharpa-268_628.h5",
+        "reference_sha256": "8c9453c0271b5ec6c096259ec01ec4eb7486ceaae8bb9fd666267680342be1b2",
+        "evaluator_git_sha": "2f4aa001358e39cda998b4b694e1e49a0700d299",
+        "episode_allocation": "fixed_per_environment",
+        "num_envs": 256,
+        "seed": 12345,
+        "episodes": 4096,
+        "success_rate": 0.0,
+        "success_95ci": [
+          0.0,
+          0.0009370118104075045
+        ],
+        "progress": 0.3023988604545593,
+        "object_pos_error_m": 0.016843175515532494,
+        "object_rot_error_rad": 0.1107112467288971,
+        "finger_rmse_rad": 0.16744422912597656,
+        "finger_mae_rad": 0.13406036794185638,
+        "arm_mae_rad": 0.03537464514374733,
+        "metric_protocol": "ConTrack_sec4.3_episode_mean_pose_joint_and_pooled_contact",
+        "contact_f1": 0.8970452547073364,
+        "contact_point_error_m": 0.015066582709550858,
+        "contact_point_samples": 524449,
+        "thresholds": {
+          "position_m": 0.1,
+          "rotation_rad": 1.0
+        }
+      },
+      "initialization_verified": "from_scratch",
+      "training_process_wall_seconds": 2098.600636571,
+      "end_to_end_wall_seconds": 2213.1415934809997
+    },
+    {
+      "task": "grab-s1_hammer_use_1-rby1a_sharpa-120_840",
+      "algorithm": "supermimic",
+      "source_commit": "21e4474ee15cdfa5b9d644dc0890b0e0e20d7c6c",
+      "attempt": 1,
+      "state": "evaluated",
+      "evaluation": {
+        "checkpoint_sha256": "3cec648458236428f74c70989e804a818979c2801147f238f1352c58e5dd320c",
+        "reference": "data/sharpa/grab-s1_hammer_use_1-rby1a_sharpa-120_840.h5",
+        "reference_sha256": "1199f14c5386d813cf8c0c54b27ea76e144a1dbbc3dc6dd38c626b79bda84cfc",
+        "evaluator_git_sha": "21e4474ee15cdfa5b9d644dc0890b0e0e20d7c6c",
+        "episode_allocation": "fixed_per_environment",
+        "num_envs": 256,
+        "seed": 12345,
+        "episodes": 4096,
+        "success_rate": 0.0146484375,
+        "success_95ci": [
+          0.011397610678307376,
+          0.018808824614217096
+        ],
+        "progress": 0.4671321213245392,
+        "object_pos_error_m": 0.02360624447464943,
+        "object_rot_error_rad": 0.3595331609249115,
+        "finger_rmse_rad": 0.22162480652332306,
+        "finger_mae_rad": 0.16339324414730072,
+        "arm_mae_rad": 0.10751871019601822,
+        "metric_protocol": "ConTrack_sec4.3_episode_mean_pose_joint_and_pooled_contact",
+        "contact_f1": 0.6343314051628113,
+        "contact_point_error_m": 0.03462972864508629,
+        "contact_point_samples": 1965374,
+        "thresholds": {
+          "position_m": 0.1,
+          "rotation_rad": 1.0
+        }
+      },
+      "initialization_verified": "from_scratch",
+      "training_process_wall_seconds": 3156.17985317,
+      "end_to_end_wall_seconds": 3557.200645123
+    },
+    {
+      "task": "grab-s1_hammer_use_1-rby1a_sharpa-120_840",
+      "algorithm": "ppo",
+      "source_commit": "2f4aa001358e39cda998b4b694e1e49a0700d299",
+      "attempt": 2,
+      "state": "pending",
+      "evaluation": null
+    },
+    {
+      "task": "grab-s1_waterbottle_offhand_1-rby1a_sharpa-24_504",
+      "algorithm": "supermimic",
+      "source_commit": "21e4474ee15cdfa5b9d644dc0890b0e0e20d7c6c",
+      "attempt": 1,
+      "state": "evaluated",
+      "evaluation": {
+        "checkpoint_sha256": "20435c45641c444fd126303997ac8d52e6cd4febfc399c308dda7324d8fde35f",
+        "reference": "data/sharpa/grab-s1_waterbottle_offhand_1-rby1a_sharpa-24_504.h5",
+        "reference_sha256": "e85e97bd12e06a54ff397b25e4bd00252fdc6b864ff2c524275f897df6301fbb",
+        "evaluator_git_sha": "21e4474ee15cdfa5b9d644dc0890b0e0e20d7c6c",
+        "episode_allocation": "fixed_per_environment",
+        "num_envs": 256,
+        "seed": 12345,
+        "episodes": 4096,
+        "success_rate": 0.007568359375,
+        "success_95ci": [
+          0.005337029100286284,
+          0.010722518175881657
+        ],
+        "progress": 0.8468625545501709,
+        "object_pos_error_m": 0.019632386043667793,
+        "object_rot_error_rad": 0.27781087160110474,
+        "finger_rmse_rad": 0.18023088574409485,
+        "finger_mae_rad": 0.13600042462348938,
+        "arm_mae_rad": 0.08452664315700531,
+        "metric_protocol": "ConTrack_sec4.3_episode_mean_pose_joint_and_pooled_contact",
+        "contact_f1": 0.5534301400184631,
+        "contact_point_error_m": 0.02284698374569416,
+        "contact_point_samples": 1858591,
+        "thresholds": {
+          "position_m": 0.1,
+          "rotation_rad": 1.0
+        }
+      },
+      "initialization_verified": "from_scratch",
+      "training_process_wall_seconds": 3173.791923964,
+      "end_to_end_wall_seconds": 3607.3005163629996
+    },
+    {
+      "task": "grab-s1_waterbottle_offhand_1-rby1a_sharpa-24_504",
+      "algorithm": "ppo",
+      "source_commit": "2f4aa001358e39cda998b4b694e1e49a0700d299",
+      "attempt": 2,
+      "state": "failed",
+      "evaluation": null
+    },
+    {
+      "task": "grab-s1_wineglass_offhand_1-rby1a_sharpa-156_516",
+      "algorithm": "supermimic",
+      "source_commit": "2f4aa001358e39cda998b4b694e1e49a0700d299",
+      "attempt": 2,
+      "state": "pending",
+      "evaluation": null
+    },
+    {
+      "task": "grab-s1_wineglass_offhand_1-rby1a_sharpa-156_516",
+      "algorithm": "ppo",
+      "source_commit": "21e4474ee15cdfa5b9d644dc0890b0e0e20d7c6c",
+      "attempt": 1,
+      "state": "evaluated",
+      "evaluation": {
+        "checkpoint_sha256": "a39b87b1e5558f209c07ae83f0a5d30a191873de32cae96fdaf69b29dafb6b66",
+        "reference": "data/sharpa/grab-s1_wineglass_offhand_1-rby1a_sharpa-156_516.h5",
+        "reference_sha256": "1d172330d83f860c4f10c675d4c8eeb01c229094104b211a244c301a6101c528",
+        "evaluator_git_sha": "21e4474ee15cdfa5b9d644dc0890b0e0e20d7c6c",
+        "episode_allocation": "fixed_per_environment",
+        "num_envs": 256,
+        "seed": 12345,
+        "episodes": 4096,
+        "success_rate": 0.557373046875,
+        "success_95ci": [
+          0.5421149622066651,
+          0.572523613098293
+        ],
+        "progress": 0.9711695313453674,
+        "object_pos_error_m": 0.027287982404232025,
+        "object_rot_error_rad": 0.13624851405620575,
+        "finger_rmse_rad": 0.16233684122562408,
+        "finger_mae_rad": 0.12864716351032257,
+        "arm_mae_rad": 0.023287802934646606,
+        "metric_protocol": "ConTrack_sec4.3_episode_mean_pose_joint_and_pooled_contact",
+        "contact_f1": 0.78700852394104,
+        "contact_point_error_m": 0.014347561635077,
+        "contact_point_samples": 2930303,
+        "thresholds": {
+          "position_m": 0.1,
+          "rotation_rad": 1.0
+        }
+      },
+      "initialization_verified": "from_scratch",
+      "training_process_wall_seconds": 2490.347580557,
+      "end_to_end_wall_seconds": 2776.525101641
+    }
+  ],
+  "scope": "Partial single-seed screen; pending and startup failures are not zero-success evaluations."
+}
