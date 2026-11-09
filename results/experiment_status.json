@@ -1,11 +1,11 @@
 {
-  "checked_utc": "2026-11-09T17:37:07.699188+00:00",
+  "checked_utc": "2026-11-09T18:00:45.985767+00:00",
   "sharpa": {
-    "state": "active",
+    "state": "finished_with_failures",
     "tasks": 13,
     "submitted": 26,
-    "cloud_attempts": 38,
-    "evaluated": 15,
+    "terminal": 26,
+    "evaluated": 21,
     "real_steps_per_run": 48000000,
     "results": "results/sharpa_screen_20261109/results.json"
   }

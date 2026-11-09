@@ -1,31 +1,67 @@
 {
-  "checked_utc": "2026-11-09T17:37:07.699188+00:00",
-  "state": "active",
+  "completed_utc": "2026-11-09T18:00:45.985767+00:00",
   "embodiment": "sharpa",
   "tasks": 13,
   "submitted": 26,
+  "terminal": 26,
   "cloud_attempts": 38,
   "retried_cases": 12,
-  "evaluated": 15,
+  "evaluated": 21,
   "training_seed": 2026,
   "evaluation_episodes": 4096,
   "real_steps_per_run": 48000000,
   "num_envs": 6000,
+  "bptt_initialization": "from_scratch",
   "cases": [
     {
       "task": "dexterhand-Cylinder_00-fps_20-rby1a_sharpa-3600_3700",
       "algorithm": "supermimic",
-      "source_commit": "2f4aa001358e39cda998b4b694e1e49a0700d299",
+      "cloud_status": "Succeeded",
+      "state": "evaluated",
       "attempt": 2,
-      "state": "pending",
-      "evaluation": null
+      "retry_of": "dlctw4utnzmvcgdz",
+      "source_commit": "2f4aa001358e39cda998b4b694e1e49a0700d299",
+      "evaluation": {
+        "checkpoint_sha256": "925faaeb1e2ea95b4995b635607a23876d139311d18e606fcd8c94dc657a35f1",
+        "reference": "data/sharpa/dexterhand-Cylinder_00-fps_20-rby1a_sharpa-3600_3700.h5",
+        "reference_sha256": "2c79c31b6c7b7e9aebfbb43a7fdf674d0e1aa0929855c496506a559d06efcd2a",
+        "evaluator_git_sha": "2f4aa001358e39cda998b4b694e1e49a0700d299",
+        "episode_allocation": "fixed_per_environment",
+        "num_envs": 256,
+        "seed": 12345,
+        "episodes": 4096,
+        "success_rate": 0.0,
+        "success_95ci": [
+          0.0,
+          0.0009370118104075045
+        ],
+        "progress": 0.45021748542785645,
+        "object_pos_error_m": 0.021566808223724365,
+        "object_rot_error_rad": 0.4698007106781006,
+        "finger_rmse_rad": 0.16930145025253296,
+        "finger_mae_rad": 0.14259222149848938,
+        "arm_mae_rad": 0.018768910318613052,
+        "metric_protocol": "ConTrack_sec4.3_episode_mean_pose_joint_and_pooled_contact",
+        "contact_f1": 0.7584049105644226,
+        "contact_point_error_m": 0.02291193976998329,
+        "contact_point_samples": 2788887,
+        "thresholds": {
+          "position_m": 0.1,
+          "rotation_rad": 1.0
+        }
+      },
+      "training_process_wall_seconds": 2785.407582824,
+      "end_to_end_wall_seconds": 3070.3469444370003,
+      "initialization_verified": "from_scratch"
     },
     {
       "task": "dexterhand-Cylinder_00-fps_20-rby1a_sharpa-3600_3700",
       "algorithm": "ppo",
-      "source_commit": "21e4474ee15cdfa5b9d644dc0890b0e0e20d7c6c",
-      "attempt": 1,
+      "cloud_status": "Succeeded",
       "state": "evaluated",
+      "attempt": 1,
+      "retry_of": null,
+      "source_commit": "21e4474ee15cdfa5b9d644dc0890b0e0e20d7c6c",
       "evaluation": {
         "checkpoint_sha256": "2109cb0a406c86f3b948c1a8b8ca6e332450509ecc5b817f77e21538c7f99f82",
         "reference": "data/sharpa/dexterhand-Cylinder_00-fps_20-rby1a_sharpa-3600_3700.h5",
@@ -55,32 +91,38 @@
           "rotation_rad": 1.0
         }
       },
-      "initialization_verified": "from_scratch",
       "training_process_wall_seconds": 1751.6114842759998,
-      "end_to_end_wall_seconds": 2085.441769351
+      "end_to_end_wall_seconds": 2085.441769351,
+      "initialization_verified": "from_scratch"
     },
     {
       "task": "arctic-s01_box_use_01-rby1a_sharpa-117_240",
       "algorithm": "supermimic",
-      "source_commit": "2f4aa001358e39cda998b4b694e1e49a0700d299",
-      "attempt": 2,
+      "cloud_status": "Failed",
       "state": "failed",
+      "attempt": 2,
+      "retry_of": "dlc8j1ix7ie5bz4z",
+      "source_commit": "2f4aa001358e39cda998b4b694e1e49a0700d299",
       "evaluation": null
     },
     {
       "task": "arctic-s01_box_use_01-rby1a_sharpa-117_240",
       "algorithm": "ppo",
-      "source_commit": "2f4aa001358e39cda998b4b694e1e49a0700d299",
-      "attempt": 2,
+      "cloud_status": "Failed",
       "state": "failed",
+      "attempt": 2,
+      "retry_of": "dlc8t14azxtu8pvh",
+      "source_commit": "2f4aa001358e39cda998b4b694e1e49a0700d299",
       "evaluation": null
     },
     {
       "task": "arctic-s01_mixer_use_01-rby1a_sharpa-45_345",
       "algorithm": "supermimic",
-      "source_commit": "21e4474ee15cdfa5b9d644dc0890b0e0e20d7c6c",
-      "attempt": 1,
+      "cloud_status": "Succeeded",
       "state": "evaluated",
+      "attempt": 1,
+      "retry_of": null,
+      "source_commit": "21e4474ee15cdfa5b9d644dc0890b0e0e20d7c6c",
       "evaluation": {
         "checkpoint_sha256": "bd4c6318d023cc3563a1a327c81886599fe36c9b636c4e52f262d03e30f7175c",
         "reference": "data/sharpa/arctic-s01_mixer_use_01-rby1a_sharpa-45_345.h5",
@@ -110,16 +152,18 @@
           "rotation_rad": 1.0
         }
       },
-      "initialization_verified": "from_scratch",
       "training_process_wall_seconds": 3681.378772284,
-      "end_to_end_wall_seconds": 4024.6253652779997
+      "end_to_end_wall_seconds": 4024.6253652779997,
+      "initialization_verified": "from_scratch"
     },
     {
       "task": "arctic-s01_mixer_use_01-rby1a_sharpa-45_345",
       "algorithm": "ppo",
-      "source_commit": "21e4474ee15cdfa5b9d644dc0890b0e0e20d7c6c",
-      "attempt": 1,
+      "cloud_status": "Succeeded",
       "state": "evaluated",
+      "attempt": 1,
+      "retry_of": null,
+      "source_commit": "21e4474ee15cdfa5b9d644dc0890b0e0e20d7c6c",
       "evaluation": {
         "checkpoint_sha256": "eed19182a5391c3a54516258e06978e11ff8c81e92091d5a5a67d56d387ba36b",
         "reference": "data/sharpa/arctic-s01_mixer_use_01-rby1a_sharpa-45_345.h5",
@@ -149,16 +193,18 @@
           "rotation_rad": 1.0
         }
       },
-      "initialization_verified": "from_scratch",
       "training_process_wall_seconds": 2814.291260738,
-      "end_to_end_wall_seconds": 3157.804018533
+      "end_to_end_wall_seconds": 3157.804018533,
+      "initialization_verified": "from_scratch"
     },
     {
       "task": "arctic-s01_notebook_use_01-rby1a_sharpa-180_270",
       "algorithm": "supermimic",
-      "source_commit": "21e4474ee15cdfa5b9d644dc0890b0e0e20d7c6c",
-      "attempt": 1,
+      "cloud_status": "Succeeded",
       "state": "evaluated",
+      "attempt": 1,
+      "retry_of": null,
+      "source_commit": "21e4474ee15cdfa5b9d644dc0890b0e0e20d7c6c",
       "evaluation": {
         "checkpoint_sha256": "8895df294355528d481b83e37ec87715fe2b0f1d5b3d56cf409cb7df20824d33",
         "reference": "data/sharpa/arctic-s01_notebook_use_01-rby1a_sharpa-180_270.h5",
@@ -188,24 +234,59 @@
           "rotation_rad": 1.0
         }
       },
-      "initialization_verified": "from_scratch",
       "training_process_wall_seconds": 3759.375119477,
-      "end_to_end_wall_seconds": 4028.1120194500004
+      "end_to_end_wall_seconds": 4028.1120194500004,
+      "initialization_verified": "from_scratch"
     },
     {
       "task": "arctic-s01_notebook_use_01-rby1a_sharpa-180_270",
       "algorithm": "ppo",
-      "source_commit": "2f4aa001358e39cda998b4b694e1e49a0700d299",
+      "cloud_status": "Succeeded",
+      "state": "evaluated",
       "attempt": 2,
-      "state": "pending",
-      "evaluation": null
+      "retry_of": "dlc9d0b2jafmap7d",
+      "source_commit": "2f4aa001358e39cda998b4b694e1e49a0700d299",
+      "evaluation": {
+        "checkpoint_sha256": "de5dbb08a3f0d4e59b7f390bae1e666303cdc8f1e479a0acead19cdb85c9987c",
+        "reference": "data/sharpa/arctic-s01_notebook_use_01-rby1a_sharpa-180_270.h5",
+        "reference_sha256": "954964d3fab47fc05015ed4294be3d550d0fd0c46e8cec71a27bac295ba60f23",
+        "evaluator_git_sha": "2f4aa001358e39cda998b4b694e1e49a0700d299",
+        "episode_allocation": "fixed_per_environment",
+        "num_envs": 256,
+        "seed": 12345,
+        "episodes": 4096,
+        "success_rate": 0.138671875,
+        "success_95ci": [
+          0.12842587096594127,
+          0.14959501647517354
+        ],
+        "progress": 0.43738749623298645,
+        "object_pos_error_m": 0.024647653102874756,
+        "object_rot_error_rad": 0.255981981754303,
+        "finger_rmse_rad": 0.16621360182762146,
+        "finger_mae_rad": 0.1259194016456604,
+        "arm_mae_rad": 0.037000276148319244,
+        "metric_protocol": "ConTrack_sec4.3_episode_mean_pose_joint_and_pooled_contact",
+        "contact_f1": 0.7161591053009033,
+        "contact_point_error_m": 0.02550729736685753,
+        "contact_point_samples": 3189647,
+        "thresholds": {
+          "position_m": 0.1,
+          "rotation_rad": 1.0
+        }
+      },
+      "training_process_wall_seconds": 2819.316706521,
+      "end_to_end_wall_seconds": 3061.079400163,
+      "initialization_verified": "from_scratch"
     },
     {
       "task": "arctic-s01_waffleiron_use_01-rby1a_sharpa-75_195",
       "algorithm": "supermimic",
-      "source_commit": "21e4474ee15cdfa5b9d644dc0890b0e0e20d7c6c",
-      "attempt": 1,
+      "cloud_status": "Succeeded",
       "state": "evaluated",
+      "attempt": 1,
+      "retry_of": null,
+      "source_commit": "21e4474ee15cdfa5b9d644dc0890b0e0e20d7c6c",
       "evaluation": {
         "checkpoint_sha256": "5898e5386e37d94d56434441ca1aa2b888d6bd3040b5215e91856c6ba860150b",
         "reference": "data/sharpa/arctic-s01_waffleiron_use_01-rby1a_sharpa-75_195.h5",
@@ -235,16 +316,18 @@
           "rotation_rad": 1.0
         }
       },
-      "initialization_verified": "from_scratch",
       "training_process_wall_seconds": 3942.263059886,
-      "end_to_end_wall_seconds": 4275.930565539999
+      "end_to_end_wall_seconds": 4275.930565539999,
+      "initialization_verified": "from_scratch"
     },
     {
       "task": "arctic-s01_waffleiron_use_01-rby1a_sharpa-75_195",
       "algorithm": "ppo",
-      "source_commit": "21e4474ee15cdfa5b9d644dc0890b0e0e20d7c6c",
-      "attempt": 1,
+      "cloud_status": "Succeeded",
       "state": "evaluated",
+      "attempt": 1,
+      "retry_of": null,
+      "source_commit": "21e4474ee15cdfa5b9d644dc0890b0e0e20d7c6c",
       "evaluation": {
         "checkpoint_sha256": "23cd611af1c0f11442fbb410b5cf4dbaefd6df5faa92ef15c6b3884c2d50b133",
         "reference": "data/sharpa/arctic-s01_waffleiron_use_01-rby1a_sharpa-75_195.h5",
@@ -274,24 +357,59 @@
           "rotation_rad": 1.0
         }
       },
-      "initialization_verified": "from_scratch",
       "training_process_wall_seconds": 2714.587919779,
-      "end_to_end_wall_seconds": 3075.793124144
+      "end_to_end_wall_seconds": 3075.793124144,
+      "initialization_verified": "from_scratch"
     },
     {
       "task": "dexterhand-Cuboid_00-fps_20-rby1a_sharpa-5880_5940",
       "algorithm": "supermimic",
-      "source_commit": "53befcb30ec7eb6a6fbaf8ab744ebe015ab3f79a",
+      "cloud_status": "Succeeded",
+      "state": "evaluated",
       "attempt": 2,
-      "state": "pending",
-      "evaluation": null
+      "retry_of": "dlc9wzhu3h3x10ry",
+      "source_commit": "53befcb30ec7eb6a6fbaf8ab744ebe015ab3f79a",
+      "evaluation": {
+        "checkpoint_sha256": "eb6a9364e166ec6eecbcece01b64d21a3c94b3d8b574218cec8cad276e48768c",
+        "reference": "data/sharpa/dexterhand-Cuboid_00-fps_20-rby1a_sharpa-5880_5940.h5",
+        "reference_sha256": "f29b84e17791e76922e07271f98e0201bd2fd630a5310bcb2b5821c133a37659",
+        "evaluator_git_sha": "53befcb30ec7eb6a6fbaf8ab744ebe015ab3f79a",
+        "episode_allocation": "fixed_per_environment",
+        "num_envs": 256,
+        "seed": 12345,
+        "episodes": 4096,
+        "success_rate": 0.0,
+        "success_95ci": [
+          0.0,
+          0.0009370118104075045
+        ],
+        "progress": 0.04242391884326935,
+        "object_pos_error_m": 0.03557128086686134,
+        "object_rot_error_rad": 0.9323388338088989,
+        "finger_rmse_rad": 0.08181686699390411,
+        "finger_mae_rad": 0.05517861992120743,
+        "arm_mae_rad": 0.0050952620804309845,
+        "metric_protocol": "ConTrack_sec4.3_episode_mean_pose_joint_and_pooled_contact",
+        "contact_f1": 0.6081448793411255,
+        "contact_point_error_m": 0.023572130128741264,
+        "contact_point_samples": 111708,
+        "thresholds": {
+          "position_m": 0.1,
+          "rotation_rad": 1.0
+        }
+      },
+      "training_process_wall_seconds": 2706.009181928,
+      "end_to_end_wall_seconds": 2903.415934703,
+      "initialization_verified": "from_scratch"
     },
     {
       "task": "dexterhand-Cuboid_00-fps_20-rby1a_sharpa-5880_5940",
       "algorithm": "ppo",
-      "source_commit": "21e4474ee15cdfa5b9d644dc0890b0e0e20d7c6c",
-      "attempt": 1,
+      "cloud_status": "Succeeded",
       "state": "evaluated",
+      "attempt": 1,
+      "retry_of": null,
+      "source_commit": "21e4474ee15cdfa5b9d644dc0890b0e0e20d7c6c",
       "evaluation": {
         "checkpoint_sha256": "69bc8adf1a3ac532c9ae26d9dceb588dba94b5f0e44757e70c6f58712efc15e9",
         "reference": "data/sharpa/dexterhand-Cuboid_00-fps_20-rby1a_sharpa-5880_5940.h5",
@@ -321,16 +439,18 @@
           "rotation_rad": 1.0
         }
       },
-      "initialization_verified": "from_scratch",
       "training_process_wall_seconds": 1728.6020892660001,
-      "end_to_end_wall_seconds": 1957.2421219809999
+      "end_to_end_wall_seconds": 1957.2421219809999,
+      "initialization_verified": "from_scratch"
     },
     {
       "task": "dexterhand-Cuboid_01-fps_20-rby1a_sharpa-7824_7864",
       "algorithm": "supermimic",
-      "source_commit": "21e4474ee15cdfa5b9d644dc0890b0e0e20d7c6c",
-      "attempt": 1,
+      "cloud_status": "Succeeded",
       "state": "evaluated",
+      "attempt": 1,
+      "retry_of": null,
+      "source_commit": "21e4474ee15cdfa5b9d644dc0890b0e0e20d7c6c",
       "evaluation": {
         "checkpoint_sha256": "439eb9869f600e5dd4f04fcd134da90f7e80671547cff4eadcdd6107d02ac90d",
         "reference": "data/sharpa/dexterhand-Cuboid_01-fps_20-rby1a_sharpa-7824_7864.h5",
@@ -360,32 +480,69 @@
           "rotation_rad": 1.0
         }
       },
-      "initialization_verified": "from_scratch",
       "training_process_wall_seconds": 2694.9171966589997,
-      "end_to_end_wall_seconds": 2881.091950796
+      "end_to_end_wall_seconds": 2881.091950796,
+      "initialization_verified": "from_scratch"
     },
     {
       "task": "dexterhand-Cuboid_01-fps_20-rby1a_sharpa-7824_7864",
       "algorithm": "ppo",
-      "source_commit": "2f4aa001358e39cda998b4b694e1e49a0700d299",
-      "attempt": 2,
+      "cloud_status": "Failed",
       "state": "failed",
+      "attempt": 2,
+      "retry_of": "dlcagyolnmkysdd2",
+      "source_commit": "2f4aa001358e39cda998b4b694e1e49a0700d299",
       "evaluation": null
     },
     {
       "task": "dexterhand-Ring_00-fps_20-rby1a_sharpa-10240_10340",
       "algorithm": "supermimic",
-      "source_commit": "2f4aa001358e39cda998b4b694e1e49a0700d299",
+      "cloud_status": "Succeeded",
+      "state": "evaluated",
       "attempt": 2,
-      "state": "pending",
-      "evaluation": null
+      "retry_of": "dlcagyolnkiweqey",
+      "source_commit": "2f4aa001358e39cda998b4b694e1e49a0700d299",
+      "evaluation": {
+        "checkpoint_sha256": "17f7c7c7a92a416a4ceca398164b4f90fdae41dd21fd5dfcc05fad40ac9e30d8",
+        "reference": "data/sharpa/dexterhand-Ring_00-fps_20-rby1a_sharpa-10240_10340.h5",
+        "reference_sha256": "dcb51df79ca0cf3e875a152ff46c0fb22f2cf983cfcd97060a48f7f3cf690022",
+        "evaluator_git_sha": "2f4aa001358e39cda998b4b694e1e49a0700d299",
+        "episode_allocation": "fixed_per_environment",
+        "num_envs": 256,
+        "seed": 12345,
+        "episodes": 4096,
+        "success_rate": 0.0,
+        "success_95ci": [
+          0.0,
+          0.0009370118104075045
+        ],
+        "progress": 0.22105494141578674,
+        "object_pos_error_m": 0.016139641404151917,
+        "object_rot_error_rad": 0.440549373626709,
+        "finger_rmse_rad": 0.19721166789531708,
+        "finger_mae_rad": 0.15626069903373718,
+        "arm_mae_rad": 0.02258080244064331,
+        "metric_protocol": "ConTrack_sec4.3_episode_mean_pose_joint_and_pooled_contact",
+        "contact_f1": 0.732790470123291,
+        "contact_point_error_m": 0.023174164816737175,
+        "contact_point_samples": 1180062,
+        "thresholds": {
+          "position_m": 0.1,
+          "rotation_rad": 1.0
+        }
+      },
+      "training_process_wall_seconds": 2994.788549874,
+      "end_to_end_wall_seconds": 3201.0445174660003,
+      "initialization_verified": "from_scratch"
     },
     {
       "task": "dexterhand-Ring_00-fps_20-rby1a_sharpa-10240_10340",
       "algorithm": "ppo",
-      "source_commit": "21e4474ee15cdfa5b9d644dc0890b0e0e20d7c6c",
-      "attempt": 1,
+      "cloud_status": "Succeeded",
       "state": "evaluated",
+      "attempt": 1,
+      "retry_of": null,
+      "source_commit": "21e4474ee15cdfa5b9d644dc0890b0e0e20d7c6c",
       "evaluation": {
         "checkpoint_sha256": "ce118b6f0cb573c786525660ecf02c73c1b47c42436e9ed2928626d50f58dc49",
         "reference": "data/sharpa/dexterhand-Ring_00-fps_20-rby1a_sharpa-10240_10340.h5",
@@ -415,16 +572,18 @@
           "rotation_rad": 1.0
         }
       },
-      "initialization_verified": "from_scratch",
       "training_process_wall_seconds": 1975.220120386,
-      "end_to_end_wall_seconds": 2237.485506596
+      "end_to_end_wall_seconds": 2237.485506596,
+      "initialization_verified": "from_scratch"
     },
     {
       "task": "grab-s1_cubemedium_offhand_1-rby1a_sharpa-180_540",
       "algorithm": "supermimic",
-      "source_commit": "21e4474ee15cdfa5b9d644dc0890b0e0e20d7c6c",
-      "attempt": 1,
+      "cloud_status": "Succeeded",
       "state": "evaluated",
+      "attempt": 1,
+      "retry_of": null,
+      "source_commit": "21e4474ee15cdfa5b9d644dc0890b0e0e20d7c6c",
       "evaluation": {
         "checkpoint_sha256": "798b18c36822b22fe30b11d95b6664db2bd2ec39b1bd92bfa5a237cf86f8c1a1",
         "reference": "data/sharpa/grab-s1_cubemedium_offhand_1-rby1a_sharpa-180_540.h5",
@@ -454,24 +613,28 @@
           "rotation_rad": 1.0
         }
       },
-      "initialization_verified": "from_scratch",
       "training_process_wall_seconds": 3263.160379219,
-      "end_to_end_wall_seconds": 3595.725443465
+      "end_to_end_wall_seconds": 3595.725443465,
+      "initialization_verified": "from_scratch"
     },
     {
       "task": "grab-s1_cubemedium_offhand_1-rby1a_sharpa-180_540",
       "algorithm": "ppo",
-      "source_commit": "2f4aa001358e39cda998b4b694e1e49a0700d299",
-      "attempt": 2,
+      "cloud_status": "Failed",
       "state": "failed",
+      "attempt": 2,
+      "retry_of": "dlcb0xvd7zmykgc9",
+      "source_commit": "2f4aa001358e39cda998b4b694e1e49a0700d299",
       "evaluation": null
     },
     {
       "task": "grab-s1_cylindermedium_offhand_1-rby1a_sharpa-268_628",
       "algorithm": "supermimic",
-      "source_commit": "21e4474ee15cdfa5b9d644dc0890b0e0e20d7c6c",
-      "attempt": 1,
+      "cloud_status": "Succeeded",
       "state": "evaluated",
+      "attempt": 1,
+      "retry_of": null,
+      "source_commit": "21e4474ee15cdfa5b9d644dc0890b0e0e20d7c6c",
       "evaluation": {
         "checkpoint_sha256": "bd5d6a985cf2a688e5c4fd8467d363a2f4bb65c05a03e6862b6f67ea258f2d17",
         "reference": "data/sharpa/grab-s1_cylindermedium_offhand_1-rby1a_sharpa-268_628.h5",
@@ -501,16 +664,18 @@
           "rotation_rad": 1.0
         }
       },
-      "initialization_verified": "from_scratch",
       "training_process_wall_seconds": 3068.384015909,
-      "end_to_end_wall_seconds": 3252.324314237
+      "end_to_end_wall_seconds": 3252.324314237,
+      "initialization_verified": "from_scratch"
     },
     {
       "task": "grab-s1_cylindermedium_offhand_1-rby1a_sharpa-268_628",
       "algorithm": "ppo",
-      "source_commit": "2f4aa001358e39cda998b4b694e1e49a0700d299",
-      "attempt": 2,
+      "cloud_status": "Succeeded",
       "state": "evaluated",
+      "attempt": 2,
+      "retry_of": "dlcbaxgqz8waf8ha",
+      "source_commit": "2f4aa001358e39cda998b4b694e1e49a0700d299",
       "evaluation": {
         "checkpoint_sha256": "055083acd844b78ab9ac2e1212e778e1a971767e64ef03cd78e5836f5abeb920",
         "reference": "data/sharpa/grab-s1_cylindermedium_offhand_1-rby1a_sharpa-268_628.h5",
@@ -540,16 +705,18 @@
           "rotation_rad": 1.0
         }
       },
-      "initialization_verified": "from_scratch",
       "training_process_wall_seconds": 2098.600636571,
-      "end_to_end_wall_seconds": 2213.1415934809997
+      "end_to_end_wall_seconds": 2213.1415934809997,
+      "initialization_verified": "from_scratch"
     },
     {
       "task": "grab-s1_hammer_use_1-rby1a_sharpa-120_840",
       "algorithm": "supermimic",
-      "source_commit": "21e4474ee15cdfa5b9d644dc0890b0e0e20d7c6c",
-      "attempt": 1,
+      "cloud_status": "Succeeded",
       "state": "evaluated",
+      "attempt": 1,
+      "retry_of": null,
+      "source_commit": "21e4474ee15cdfa5b9d644dc0890b0e0e20d7c6c",
       "evaluation": {
         "checkpoint_sha256": "3cec648458236428f74c70989e804a818979c2801147f238f1352c58e5dd320c",
         "reference": "data/sharpa/grab-s1_hammer_use_1-rby1a_sharpa-120_840.h5",
@@ -579,24 +746,59 @@
           "rotation_rad": 1.0
         }
       },
-      "initialization_verified": "from_scratch",
       "training_process_wall_seconds": 3156.17985317,
-      "end_to_end_wall_seconds": 3557.200645123
+      "end_to_end_wall_seconds": 3557.200645123,
+      "initialization_verified": "from_scratch"
     },
     {
       "task": "grab-s1_hammer_use_1-rby1a_sharpa-120_840",
       "algorithm": "ppo",
-      "source_commit": "2f4aa001358e39cda998b4b694e1e49a0700d299",
+      "cloud_status": "Succeeded",
+      "state": "evaluated",
       "attempt": 2,
-      "state": "pending",
-      "evaluation": null
+      "retry_of": "dlcbkx24rnxhtedm",
+      "source_commit": "2f4aa001358e39cda998b4b694e1e49a0700d299",
+      "evaluation": {
+        "checkpoint_sha256": "cf61d49bb682ddf295ebbc7127aa4742c00278e47efe58a1aab288e4f4034081",
+        "reference": "data/sharpa/grab-s1_hammer_use_1-rby1a_sharpa-120_840.h5",
+        "reference_sha256": "1199f14c5386d813cf8c0c54b27ea76e144a1dbbc3dc6dd38c626b79bda84cfc",
+        "evaluator_git_sha": "2f4aa001358e39cda998b4b694e1e49a0700d299",
+        "episode_allocation": "fixed_per_environment",
+        "num_envs": 256,
+        "seed": 12345,
+        "episodes": 4096,
+        "success_rate": 0.762939453125,
+        "success_95ci": [
+          0.7496726563005094,
+          0.7757134952034903
+        ],
+        "progress": 0.997160017490387,
+        "object_pos_error_m": 0.02122076228260994,
+        "object_rot_error_rad": 0.26219606399536133,
+        "finger_rmse_rad": 0.19553346931934357,
+        "finger_mae_rad": 0.1489989310503006,
+        "arm_mae_rad": 0.05865180492401123,
+        "metric_protocol": "ConTrack_sec4.3_episode_mean_pose_joint_and_pooled_contact",
+        "contact_f1": 0.8292266130447388,
+        "contact_point_error_m": 0.015101555734872818,
+        "contact_point_samples": 8254226,
+        "thresholds": {
+          "position_m": 0.1,
+          "rotation_rad": 1.0
+        }
+      },
+      "training_process_wall_seconds": 2135.184223999,
+      "end_to_end_wall_seconds": 2581.8197899780002,
+      "initialization_verified": "from_scratch"
     },
     {
       "task": "grab-s1_waterbottle_offhand_1-rby1a_sharpa-24_504",
       "algorithm": "supermimic",
-      "source_commit": "21e4474ee15cdfa5b9d644dc0890b0e0e20d7c6c",
-      "attempt": 1,
+      "cloud_status": "Succeeded",
       "state": "evaluated",
+      "attempt": 1,
+      "retry_of": null,
+      "source_commit": "21e4474ee15cdfa5b9d644dc0890b0e0e20d7c6c",
       "evaluation": {
         "checkpoint_sha256": "20435c45641c444fd126303997ac8d52e6cd4febfc399c308dda7324d8fde35f",
         "reference": "data/sharpa/grab-s1_waterbottle_offhand_1-rby1a_sharpa-24_504.h5",
@@ -626,32 +828,69 @@
           "rotation_rad": 1.0
         }
       },
-      "initialization_verified": "from_scratch",
       "training_process_wall_seconds": 3173.791923964,
-      "end_to_end_wall_seconds": 3607.3005163629996
+      "end_to_end_wall_seconds": 3607.3005163629996,
+      "initialization_verified": "from_scratch"
     },
     {
       "task": "grab-s1_waterbottle_offhand_1-rby1a_sharpa-24_504",
       "algorithm": "ppo",
-      "source_commit": "2f4aa001358e39cda998b4b694e1e49a0700d299",
-      "attempt": 2,
+      "cloud_status": "Failed",
       "state": "failed",
+      "attempt": 2,
+      "retry_of": "dlcbuwnijton9ahm",
+      "source_commit": "2f4aa001358e39cda998b4b694e1e49a0700d299",
       "evaluation": null
     },
     {
       "task": "grab-s1_wineglass_offhand_1-rby1a_sharpa-156_516",
       "algorithm": "supermimic",
-      "source_commit": "2f4aa001358e39cda998b4b694e1e49a0700d299",
+      "cloud_status": "Succeeded",
+      "state": "evaluated",
       "attempt": 2,
-      "state": "pending",
-      "evaluation": null
+      "retry_of": "dlcc4w8wb4f51htg",
+      "source_commit": "2f4aa001358e39cda998b4b694e1e49a0700d299",
+      "evaluation": {
+        "checkpoint_sha256": "072a2cb4b553335e9e52cc0242dbecdbf7c1d594cb1653c71eb1a78c20361c36",
+        "reference": "data/sharpa/grab-s1_wineglass_offhand_1-rby1a_sharpa-156_516.h5",
+        "reference_sha256": "1d172330d83f860c4f10c675d4c8eeb01c229094104b211a244c301a6101c528",
+        "evaluator_git_sha": "2f4aa001358e39cda998b4b694e1e49a0700d299",
+        "episode_allocation": "fixed_per_environment",
+        "num_envs": 256,
+        "seed": 12345,
+        "episodes": 4096,
+        "success_rate": 0.001708984375,
+        "success_95ci": [
+          0.0008280752471923774,
+          0.0035237026361287734
+        ],
+        "progress": 0.41553688049316406,
+        "object_pos_error_m": 0.020736301317811012,
+        "object_rot_error_rad": 0.24806198477745056,
+        "finger_rmse_rad": 0.17028756439685822,
+        "finger_mae_rad": 0.14263537526130676,
+        "arm_mae_rad": 0.0291063841432333,
+        "metric_protocol": "ConTrack_sec4.3_episode_mean_pose_joint_and_pooled_contact",
+        "contact_f1": 0.6305865049362183,
+        "contact_point_error_m": 0.016402404755353928,
+        "contact_point_samples": 619381,
+        "thresholds": {
+          "position_m": 0.1,
+          "rotation_rad": 1.0
+        }
+      },
+      "training_process_wall_seconds": 3280.258178164,
+      "end_to_end_wall_seconds": 3542.458815065,
+      "initialization_verified": "from_scratch"
     },
     {
       "task": "grab-s1_wineglass_offhand_1-rby1a_sharpa-156_516",
       "algorithm": "ppo",
-      "source_commit": "21e4474ee15cdfa5b9d644dc0890b0e0e20d7c6c",
-      "attempt": 1,
+      "cloud_status": "Succeeded",
       "state": "evaluated",
+      "attempt": 1,
+      "retry_of": null,
+      "source_commit": "21e4474ee15cdfa5b9d644dc0890b0e0e20d7c6c",
       "evaluation": {
         "checkpoint_sha256": "a39b87b1e5558f209c07ae83f0a5d30a191873de32cae96fdaf69b29dafb6b66",
         "reference": "data/sharpa/grab-s1_wineglass_offhand_1-rby1a_sharpa-156_516.h5",
@@ -681,10 +920,10 @@
           "rotation_rad": 1.0
         }
       },
-      "initialization_verified": "from_scratch",
       "training_process_wall_seconds": 2490.347580557,
-      "end_to_end_wall_seconds": 2776.525101641
+      "end_to_end_wall_seconds": 2776.525101641,
+      "initialization_verified": "from_scratch"
     }
   ],
-  "scope": "Partial single-seed screen; pending and startup failures are not zero-success evaluations."
+  "scope": "Single-seed Sharpa fixed e3 screen. 48M per method/task; the XHand screen used 64M."
 }

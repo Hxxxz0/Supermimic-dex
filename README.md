@@ -13,7 +13,7 @@ This release packages the **Hammer BPTT policy with 99.9756% recorded success (4
 
 Ten additional XHand tasks have completed BPTT/PPO controls. From-scratch BPTT reached **99.9756% on WineGlass** and **99.6338% on WaterBottle**, using the same Hammer e3 configuration. Both policies and evaluation receipts are included. [Full task table, data links and reproduction commands](docs/CROSS_TASK_RESULTS.md).
 
-These are single-seed 64M results. Other tasks remain substantially below PPO, and recorded BPTT training time was 1.51–1.86× PPO. All 13 Sharpa clips are being tested separately; see [experiment status](results/experiment_status.json). `v0.1.0` retains the original Hammer release.
+These are single-seed 64M results. Other tasks remain substantially below PPO, and recorded BPTT training time was 1.51–1.86× PPO. All 13 Sharpa follow-up controls have finished; see [Sharpa results](docs/SHARPA_RESULTS.md). `v0.1.0` retains the original Hammer release.
 
 ## Recorded Hammer result
 
