@@ -1,0 +1,32 @@
+{
+  "checkpoint": "results/hammer_best/policy.pt",
+  "checkpoint_sha256": "845db072f3598bd51e065ac933cd2d5f28c8a2b0f7425f24de7ab8d1ae0a57ba",
+  "reference": "data/xhand/grab-s1_hammer_use_1-xarm7_xhand-120_840.h5",
+  "reference_sha256": "9771a4bd8cf813465af026d2f482bd0d9485b7a35313f1285c75d21a4756f183",
+  "evaluator_git_sha": "a232096726ae6c9a6523aabe3b8cd7a156bd66a0",
+  "episode_allocation": "fixed_per_environment",
+  "num_envs": 256,
+  "seed": 12345,
+  "episodes": 4096,
+  "success_rate": 0.999755859375,
+  "success_95ci": [
+    0.9986182614715179,
+    0.9999569029933727
+  ],
+  "progress": 0.9999544620513916,
+  "object_pos_error_m": 0.023630237206816673,
+  "object_rot_error_rad": 0.21057409048080444,
+  "finger_rmse_rad": 0.19233804941177368,
+  "finger_mae_rad": 0.15991967916488647,
+  "arm_mae_rad": 0.024599876254796982,
+  "metric_protocol": "ConTrack_sec4.3_episode_mean_pose_joint_and_pooled_contact",
+  "contact_f1": 0.6926401257514954,
+  "contact_point_error_m": 0.015882136300206184,
+  "contact_point_samples": 5732436,
+  "thresholds": {
+    "position_m": 0.1,
+    "rotation_rad": 1.0
+  },
+  "publication_note": "Portable paths; original metrics and evaluation source revision retained.",
+  "original_evaluation_sha256": "f6ecafceb188c7dc5d96c115814b31ebecf3e5132707f855c6a0a7a1d33bfc78"
+}

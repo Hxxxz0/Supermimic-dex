@@ -1,0 +1,9 @@
+include README_zh.md SUPERMIMIC.md requirements.txt
+recursive-include docs *.md *.json *.png *.jpg
+recursive-include configs *.json
+recursive-include results/hammer_best *.json *.pt
+recursive-include scripts *.py *.sh
+recursive-include source/ConTrack *.py *.toml
+recursive-include tests *.py
+include assets/simplify_mesh.py
+recursive-exclude * __pycache__ *.py[cod]
