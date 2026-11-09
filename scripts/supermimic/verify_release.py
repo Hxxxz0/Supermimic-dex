@@ -126,6 +126,16 @@ def verify(repo=REPO):
     reference = repo / evaluation["reference"]
     if reference.is_file() and sha256(reference) != evaluation["reference_sha256"]:
         raise ValueError("Hammer reference differs from the evaluated clip")
+    video = repo / "docs/media/hammer_bptt_best.mp4"
+    video_receipt = json.loads((repo / "docs/media/hammer_bptt_best.json").read_text())
+    if sha256(video) != video_receipt["video_sha256"]:
+        raise ValueError("Released video differs from the recorded BPTT rollout")
+    if (
+        video_receipt["checkpoint_sha256"] != evaluation["checkpoint_sha256"]
+        or video_receipt["reference_sha256"] != evaluation["reference_sha256"]
+        or video_receipt["thresholds"] != evaluation["thresholds"]
+    ):
+        raise ValueError("Video does not use the evaluated BPTT policy/reference/protocol")
     result = {
         "verified": True,
         "source_files_checked": checked,
@@ -133,6 +143,7 @@ def verify(repo=REPO):
         "policy_sha256": evaluation["checkpoint_sha256"],
         "successes": 4095,
         "episodes": 4096,
+        "video_sha256": video_receipt["video_sha256"],
         "scope": "Source/configuration/artifact integrity; recorded success, not a new training experiment.",
     }
     print(json.dumps(result, indent=2))
