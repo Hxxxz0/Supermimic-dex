@@ -123,10 +123,14 @@ def main():
             raise RuntimeError("RGB warmup changed the physical state before rollout")
         selected = args.env_index
         prescan_steps, prescan_outcomes = 0, []
+        selection_events = []
         if args.select_success_env:
             valid = torch.ones(args.num_envs, dtype=torch.bool, device=wrapped.device)
             consecutive = torch.zeros(args.num_envs, dtype=torch.long, device=wrapped.device)
-            scan_limit = max(2, args.prescan_successes * 4) * (
+            rejected = torch.zeros(args.num_envs, dtype=torch.bool, device=wrapped.device)
+            candidate = None
+            scan_stride = max(1, round(1 / (env.unwrapped.step_dt * args.fps)))
+            scan_limit = max(2, args.prescan_successes * 6) * (
                 int(adapter.task.length / adapter.task.frame_step) + 10
             )
             found = False
@@ -135,6 +139,8 @@ def main():
                     adapter.begin()
                     obs, _, _, _ = wrapped.step(policy.act_inference(obs))
                     record = adapter.finish()
+                if (prescan_steps - 1) % scan_stride == 0:
+                    env.render()
                 valid &= record["valid"]
                 successes = record["done"] & record["timeout"] & ~record["terminated"] & valid
                 consecutive[record["done"] & ~successes] = 0
@@ -148,11 +154,20 @@ def main():
                             step=prescan_steps,
                         )
                     )
-                if bool(qualified.any()):
-                    selected = int(qualified.nonzero()[0, 0])
-                    env.unwrapped.viewport_camera_controller.set_view_env_index(selected)
-                    found = True
-                    break
+                if candidate is not None:
+                    if bool(record["done"][candidate] and not successes[candidate]):
+                        rejected[candidate] = True
+                        candidate = None
+                    elif bool(qualified[candidate]):
+                        selected = candidate
+                        found = True
+                        break
+                eligible = qualified & ~rejected
+                if candidate is None and bool(eligible.any()):
+                    candidate = int(eligible.nonzero()[0, 0])
+                    env.unwrapped.viewport_camera_controller.set_view_env_index(candidate)
+                    consecutive[candidate] = 0
+                    selection_events.append(dict(step=prescan_steps, environment_index=candidate))
                 valid[record["done"]] = True
             if not found:
                 args.output.with_suffix(".prescan.json").write_text(
@@ -274,6 +289,8 @@ def main():
             ),
             "prescan_steps": prescan_steps,
             "prescan_required_successes": args.prescan_successes,
+            "prescan_camera_confirmation": args.select_success_env,
+            "selection_events": selection_events,
             "prescan_outcomes": prescan_outcomes,
             "selection": (
                 "first successful episodes; all attempts recorded"
