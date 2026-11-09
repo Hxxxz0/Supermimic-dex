@@ -1,5 +1,5 @@
 include README_zh.md SUPERMIMIC.md requirements.txt
-recursive-include docs *.md *.json *.png *.jpg
+recursive-include docs *.md *.json *.png *.jpg *.mp4
 recursive-include configs *.json
 recursive-include results/hammer_best *.json *.pt
 recursive-include scripts *.py *.sh

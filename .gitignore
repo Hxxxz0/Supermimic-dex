@@ -35,6 +35,7 @@ assets/meshes/
 assets/urdf/
 *.h5
 *.mp4
+!docs/media/hammer_bptt_best.mp4
 *.webm
 *.gif
 *.dmp

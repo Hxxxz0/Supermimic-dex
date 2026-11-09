@@ -63,6 +63,10 @@ The exact training command is an expected reproduction recipe, not a promise of 
 
 ## Recording a policy video
 
+[![Hammer BPTT policy rollout](docs/media/hammer_preview.png)](https://github.com/Hxxxz0/Supermimic-dex/raw/refs/heads/main/docs/media/hammer_bptt_best.mp4)
+
+[Watch/download the 18-second BPTT video](docs/media/hammer_bptt_best.mp4) · [Recording receipt](docs/media/hammer_bptt_best.json). Three consecutive episodes succeeded; this is not a replacement for the full evaluation.
+
 ```bash
 bash scripts/supermimic/python.sh scripts/supermimic/record_video.py \
   --checkpoint results/hammer_best/policy.pt \

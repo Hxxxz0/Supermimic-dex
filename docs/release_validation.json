@@ -1,0 +1,55 @@
+{
+  "source_revision": "a232096726ae6c9a6523aabe3b8cd7a156bd66a0",
+  "core_modules": 12,
+  "source_contract_files": 87,
+  "cpu_tests": {
+    "passed": 29,
+    "baseline_tests": 25,
+    "new_resource_tests": 4,
+    "clean_clone_passed": true
+  },
+  "style": {
+    "ruff": "0.14.4",
+    "check": "passed",
+    "format_check": "passed"
+  },
+  "upstream_resources": {
+    "downloaded_and_verified_in_clean_clone": 189,
+    "upstream_sha": "f5efe18e4b1f986566b252265c4bf63f3b67c6c6"
+  },
+  "packaging": {
+    "sdist_built": true,
+    "wheel_built": true,
+    "isolated_wheel_import_passed": true
+  },
+  "recorded_training_result": {
+    "successes": 4095,
+    "episodes": 4096,
+    "seed": 2026
+  },
+  "video": {
+    "path": "docs/media/hammer_bptt_best.mp4",
+    "sha256": "a6d856930fdb6464477564edbbdd30652eba3fb51323076100b9868fb45ffb25",
+    "policy_sha256": "845db072f3598bd51e065ac933cd2d5f28c8a2b0f7425f24de7ab8d1ae0a57ba",
+    "episodes": [
+      {
+        "episode": 1,
+        "steps": 360,
+        "success": true
+      },
+      {
+        "episode": 2,
+        "steps": 360,
+        "success": true
+      },
+      {
+        "episode": 3,
+        "steps": 360,
+        "success": true
+      }
+    ],
+    "duration_seconds": 18
+  },
+  "retraining_after_cleanup": false,
+  "validation_scope": "Preserved source/configuration, exact original BPTT export, CPU checks, resource download/build/install and native rendering. Original 64M training was not repeated."
+}

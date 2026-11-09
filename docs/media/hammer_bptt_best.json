@@ -1,0 +1,44 @@
+{
+  "checkpoint_sha256": "845db072f3598bd51e065ac933cd2d5f28c8a2b0f7425f24de7ab8d1ae0a57ba",
+  "reference_sha256": "9771a4bd8cf813465af026d2f482bd0d9485b7a35313f1285c75d21a4756f183",
+  "evaluation_seed": 12345,
+  "environment_index": 0,
+  "num_envs": 2,
+  "selection": "first consecutive episodes; no success filtering",
+  "episodes": [
+    {
+      "episode": 1,
+      "steps": 360,
+      "success": true
+    },
+    {
+      "episode": 2,
+      "steps": 360,
+      "success": true
+    },
+    {
+      "episode": 3,
+      "steps": 360,
+      "success": true
+    }
+  ],
+  "thresholds": {
+    "position_m": 0.1,
+    "rotation_rad": 1.0
+  },
+  "fps": 30.0,
+  "frames": 540,
+  "duration_seconds": 18.0,
+  "video_sha256": "a6d856930fdb6464477564edbbdd30652eba3fb51323076100b9868fb45ffb25",
+  "camera_eye": [
+    0.9,
+    -0.85,
+    0.7
+  ],
+  "camera_lookat": [
+    0.4,
+    0.0,
+    0.15
+  ],
+  "note": "Illustrative policy rollout; the reported success rate comes from a separate 4096-episode evaluation."
+}

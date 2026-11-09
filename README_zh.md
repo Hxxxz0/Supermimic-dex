@@ -4,6 +4,7 @@
 
 **已保存的 BPTT 策略成功率为 99.9756%（4095/4096）**，从头训练，`e3 / seed 2026`，原源码提交 `a232096726ae6c9a6523aabe3b8cd7a156bd66a0`。Hammer 使用双手 xArm7/XHand。权重、完整训练配置、评估记录和源码校验信息均在仓库内。
 
+- [Hammer BPTT 视频：18 秒，连续 3 回合](docs/media/hammer_bptt_best.mp4)
 - [安装与环境](docs/SETUP.md)
 - [英文 README：训练、评估、录视频的完整命令](README.md)
 - [BPTT 与 WM 设计](docs/METHOD.md)
