@@ -27,6 +27,10 @@ def main():
     parser.add_argument("--embodiment", choices=("xhand", "sharpa"), default="xhand")
     parser.add_argument("--successes-only", action="store_true")
     parser.add_argument("--max-attempts", type=int, default=30)
+    parser.add_argument("--num-envs", type=int, default=2)
+    parser.add_argument("--env-index", type=int, default=0)
+    parser.add_argument("--select-success-env", action="store_true",
+                        help="Select the first successful environment in a bounded prescan")
     parser.add_argument("--eye", type=float, nargs=3, default=(0.9, -0.85, 0.7))
     parser.add_argument("--lookat", type=float, nargs=3, default=(0.4, 0.0, 0.15))
     AppLauncher.add_app_launcher_args(parser)
@@ -35,6 +39,8 @@ def main():
         parser.error("--episodes and --fps must be positive")
     if args.successes_only and args.max_attempts < args.episodes:
         parser.error("--max-attempts must be at least --episodes")
+    if args.num_envs < 2 or not 0 <= args.env_index < args.num_envs:
+        parser.error("Invalid --num-envs or --env-index")
     args.headless = args.enable_cameras = True
     os.environ["CONTRACK_XARM_XHAND_DATA"] = str(
         args.data.resolve() if args.embodiment == "xhand" else
@@ -69,13 +75,13 @@ def main():
                    else "Isaac-Rby1a-Sharpa-Mimic-Manager-Play-v0")
         env_cfg = load_cfg_from_registry(task_id, "env_cfg_entry_point")
         agent_cfg = load_cfg_from_registry(task_id, "rsl_rl_cfg_entry_point")
-        env_cfg.scene.num_envs, env_cfg.seed = 2, args.seed
+        env_cfg.scene.num_envs, env_cfg.seed = args.num_envs, args.seed
         env_cfg.sim.device = args.device or "cuda:0"
         env_cfg.object_pos_threshold_min = env_cfg.object_pos_threshold_max = 0.1
         env_cfg.object_rot_threshold_min = env_cfg.object_rot_threshold_max = 1.0
         env_cfg.viewer.resolution = (1280, 720)
         env_cfg.viewer.eye, env_cfg.viewer.lookat = tuple(args.eye), tuple(args.lookat)
-        env_cfg.viewer.origin_type, env_cfg.viewer.env_index = "env", 0
+        env_cfg.viewer.origin_type, env_cfg.viewer.env_index = "env", args.env_index
         env = gym.make(task_id, cfg=env_cfg, render_mode="rgb_array")
         wrapped = RslRlVecEnvWrapper(env, clip_actions=agent_cfg.clip_actions)
         adapter = IsaacAdapter(env.unwrapped)
@@ -92,6 +98,31 @@ def main():
         title = args.title or args.data.stem
         policy.load_state_dict(state["model_state_dict"])
         policy.eval()
+        selected = args.env_index
+        prescan_steps, prescan_outcomes = 0, []
+        if args.select_success_env:
+            valid = torch.ones(args.num_envs, dtype=torch.bool, device=wrapped.device)
+            scan_limit = 2 * (int(adapter.task.length / adapter.task.frame_step) + 10)
+            found = False
+            for prescan_steps in range(1, scan_limit + 1):
+                with torch.inference_mode():
+                    adapter.begin()
+                    obs, _, _, _ = wrapped.step(policy.act_inference(obs))
+                    record = adapter.finish()
+                valid &= record["valid"]
+                successes = record["done"] & record["timeout"] & ~record["terminated"] & valid
+                for index in record["done"].nonzero().flatten().tolist():
+                    prescan_outcomes.append(dict(environment_index=index,
+                                                 success=bool(successes[index]), step=prescan_steps))
+                if bool(successes.any()):
+                    selected = int(successes.nonzero()[0, 0])
+                    env.unwrapped.viewport_camera_controller.set_view_env_index(selected)
+                    found = True
+                    break
+                valid[record["done"]] = True
+            if not found:
+                args.output.with_suffix(".prescan.json").write_text(json.dumps(prescan_outcomes, indent=2) + "\n")
+                raise RuntimeError("No finite successful episode found in the bounded prescan")
         stride = max(1, round(1 / (env.unwrapped.step_dt * args.fps)))
         actual_fps = 1 / (env.unwrapped.step_dt * stride)
         writer = imageio.get_writer(
@@ -128,7 +159,7 @@ def main():
                 adapter.begin()
                 obs, _, _, _ = wrapped.step(policy.act_inference(obs))
                 record = adapter.finish()
-            if not bool(record["valid"][0]):
+            if not bool(record["valid"][selected]):
                 raise RuntimeError("Non-finite native state in the recorded environment")
             if record_stride_steps % stride == 0:
                 frame = env.render()
@@ -158,9 +189,9 @@ def main():
             steps += 1
             record_stride_steps += 1
             episode_steps += 1
-            if bool(record["done"][0]):
+            if bool(record["done"][selected]):
                 outcome = dict(attempt=len(attempts) + 1, steps=episode_steps,
-                               success=bool(record["timeout"][0] and not record["terminated"][0]))
+                               success=bool(record["timeout"][selected] and not record["terminated"][selected]))
                 attempts.append(outcome)
                 if not args.successes_only or outcome["success"]:
                     episodes.append(outcome | dict(episode=len(episodes) + 1))
@@ -184,8 +215,12 @@ def main():
             "checkpoint_sha256": sha256(args.checkpoint),
             "reference_sha256": sha256(args.data),
             "evaluation_seed": args.seed,
-            "environment_index": 0,
-            "num_envs": 2,
+            "environment_index": selected,
+            "num_envs": args.num_envs,
+            "environment_selection": ("first successful environment in a bounded prescan"
+                                      if args.select_success_env else "specified environment"),
+            "prescan_steps": prescan_steps,
+            "prescan_outcomes": prescan_outcomes,
             "selection": ("first successful episodes; all attempts recorded" if args.successes_only
                           else "first consecutive episodes; no success filtering"),
             "episodes": episodes,
